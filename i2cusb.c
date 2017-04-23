@@ -13,12 +13,20 @@
  * Datum: Sommersemester 2017
  **********************************************************************/
 
+#include <stdio.h>
 #include <stdbool.h>
 
 #include "i2cusb.h"
 
+int fd;
+
 void init(unsigned int portNr, unsigned int takt) {
-	//
+	// Seriellen Port oeffnen
+	if((fd = oeffne_port(fd, portNr)) == -1) {
+		perror("Oeffnen vom seriellen Port fehlgeschlagen!");
+	}
+	// Reset des USB-ITS-Geraets
+	
 }
 
 void serialDump(void) {
