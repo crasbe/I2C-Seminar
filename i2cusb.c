@@ -23,7 +23,7 @@ int fd;
 void init(unsigned int portNr, unsigned int takt) {
 	// Seriellen Port oeffnen
 	if((fd = oeffne_port(fd, portNr)) == -1) {
-		perror("Oeffnen vom seriellen Port fehlgeschlagen!");
+		fprintf(stderr, "Oeffnen vom seriellen Port fehlgeschlagen!");
 	}
 	// Reset des USB-ITS-Geraets
 	
@@ -60,12 +60,10 @@ char restart_iic(bool MRX_ACK, char dest, char mode) {
 
 void wr_byte_port(char zuSchreiben) {
 	//
-	return 0;
 }
 
-void rd_bate_port(char* gelesen) {
+void rd_byte_port(char* gelesen) {
 	//
-	return 0;
 }
 
 

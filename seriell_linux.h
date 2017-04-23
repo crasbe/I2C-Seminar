@@ -18,7 +18,7 @@
 #include <stdbool.h>
 
 // serieller Port per USB
-#define PORTNAME "/dev/ttyUSB"
+#define PORTNAME "/dev/ttyUSBx" // das x wird durch eine Zahl ersetzt
 // die Baudrate als termios Konstante definieren
 #define BAUDRATE B38400
 
@@ -31,6 +31,6 @@
 #define FLAGS (O_RDWR | O_NOCTTY | O_SYNC)
 
 
-extern bool init_dev(int port, int baudrate);
+extern int oeffne_port(int port, int baudrate);
 
 #endif // SERIELL_LINUX_H_

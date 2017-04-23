@@ -17,11 +17,11 @@
 
 #ifdef __linux__
 #include "seriell_linux.h"
-#ifdef __WIN32
+#elif defined __WIN32
 #include "seriell_win32.h"
-#ifdef __WIN64
+#elif defined __WIN64
 #include "seriell_win64.h"
-#ifdef __APPLE__ && __MACH__ // MacOS X
+#elif defined __APPLE__ && __MACH__ // MacOS X
 #include "seriell_macosx.h"
 #endif
 
