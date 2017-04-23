@@ -27,31 +27,32 @@ PLATTFORM = linux
 ZIEL = i2cseminar
 
 # Liste der C-Quelldateien
-SRC = $(ZIEL) i2cusb.c
+SRC = $(ZIEL).c i2cusb.c
 
 # Plattformspezifische Definitionen von Variablen
 #     - Die korrekte Quelldatei zum Ansprechen der
 #       seriellen Schnittstelle laden.
 #     - Fuer Windows die Dateiendung .exe spezifizieren
-ifeq($(PLATTFORM),linux)
+ifeq ($(PLATTFORM),linux)
     SRC += seriell_linux.c
-ifeq($(PLATTFORM),win32)
+endif
+ifeq ($(PLATTFORM),win32)
     SRC += seriell_win32.c
     ENDUNG = .exe
-ifeq($(PLATTFORM),win64)
+endif
+ifeq ($(PLATTFORM),win64)
     SRC += seriell_win64.c
     ENDUNG = .exe
-ifeq($(PLATTFORM),macosx)
+endif
+ifeq ($(PLATTFORM),macosx)
     SRC += seriell_macosx.c
-else
-    $(error Ungueltige Plattform!)
 endif
 
 # Compiler Flags
 #     Die Compilerflags setzen den C-Standard auf C99 und aktivieren
 #     (fast) alle Warnungen.
 CFLAGS =  -std=c99
-CFLAGS += -Wall -Wextra - Wpedantic
+CFLAGS += -Wall -Wextra -Wpedantic
 
 #=======================================================================
 # Programme auswaehlen
@@ -63,7 +64,7 @@ ORDNER = mkdir
 # Compiler auswaehlen
 #     Der Quellcode ist fuer gcc geschrieben, andere Compiler sind
 #     eventuell mit Anpassungen moeglich.
-CC = gcc6
+CC = gcc
 #CC = gcc
 
 # Objektdateien als Abhaengigkeit definieren
@@ -76,28 +77,31 @@ MSG_COMPILE = Kompiliere:
 
 
 # Standard-Target
-all: ccversion $(TARGET)
+all: ccversion $(ZIEL)
 
 
 # Compiler-Version ausgeben
 ccversion:
-    @echo $(CC) --version
-    
-# Target kompilieren
-%.o: $(OBJ)
-    @echo $(MSG_COMPILE) $<
-    $(CC) -c $(CFLAGS) $< -o $@
+	$(CC) --version
     
 # Target linken
-$(TARGET): $(OBJ)
-    @echo $(MSG_LINK) $@
-    $(CC) $(LDFLAGS) $^ --output $@$(ENDUNG)
+$(ZIEL): $(OBJ)
+	@echo $(MSG_LINK) $@
+	$(CC) $(LDFLAGS) $^ --output $@$(ENDUNG)
+   
+# Target kompilieren
+%.o: %.c
+	@echo $(MSG_COMPILE) $<
+	$(CC) -c $(CFLAGS) $< -o $@
     
+
 # Projektverzeichnis saeubern
 clean:
-    @echo $(MSG_CLEAN)
-    $(LOESCH) *.o $(TARGET)$(ENDUNG)
+	@echo $(MSG_CLEAN)
+	$(LOESCH) *.o $(ZIEL)$(ENDUNG)
     
 # Programm ausfuehren
-run: $(TARGET)$(ENDUNG)
-    ./$(TARGET)$(ENDUNG)
+run: $(ZIEL)$(ENDUNG)
+	./$(ZIEL)$(ENDUNG)
+	
+.PHONY : all clean ccversion run
