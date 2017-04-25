@@ -20,7 +20,7 @@
 
 int fd;
 
-void init(unsigned int portNr, unsigned int takt) {
+void Init(int portNr, int takt) {
 	// Seriellen Port oeffnen
 	if((fd = oeffne_port(fd, portNr)) == -1) {
 		fprintf(stderr, "Oeffnen vom seriellen Port fehlgeschlagen!");
@@ -29,11 +29,15 @@ void init(unsigned int portNr, unsigned int takt) {
 	
 }
 
+void DeInit(void) {
+	//
+}
+
 void serialDump(void) {
 	//
 }
 
-char start_iic(bool MRX_ACK, unsigned short dest, char mode) {
+char start_iic(bool MRX_ACK, short dest, char mode) {
 	//
 	return 0;
 }
