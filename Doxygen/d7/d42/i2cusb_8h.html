@@ -1,0 +1,597 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>I2C-Seminar: i2cusb.h-Dateireferenz</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">I2C-Seminar
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Hauptseite</span></a></li>
+      <li><a href="../../pages.html"><span>Zusätzliche&#160;Informationen</span></a></li>
+      <li><a href="../../modules.html"><span>Module</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="../../search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="../../globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Makrodefinitionen</a> &#124;
+<a href="#func-members">Funktionen</a> &#124;
+<a href="#var-members">Variablen</a>  </div>
+  <div class="headertitle">
+<div class="title">i2cusb.h-Dateireferenz</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Interface für das USB-ITS-Gerät fuer I2C-Seminar an der TUHH.  
+<a href="#details">Mehr ...</a></p>
+<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include-Abhängigkeitsdiagramm für i2cusb.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d81/i2cusb_8h__incl.png" border="0" usemap="#i2cusb_8h" alt=""/></div>
+<map name="i2cusb_8h" id="i2cusb_8h">
+</map>
+</div>
+</div>
+<p><a href="../../d7/d42/i2cusb_8h_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Makrodefinitionen</h2></td></tr>
+<tr class="memitem:aac9466e23c5beb27830b759a5be0ffe6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aac9466e23c5beb27830b759a5be0ffe6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>cTimeoutInMs</b>&#160;&#160;&#160;1000</td></tr>
+<tr class="separator:aac9466e23c5beb27830b759a5be0ffe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1eda0c3418f456e8d3c51785a496ad8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1eda0c3418f456e8d3c51785a496ad8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>cTimeoutInit</b>&#160;&#160;&#160;5000</td></tr>
+<tr class="separator:ab1eda0c3418f456e8d3c51785a496ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeceffeac2d165fc042fc28c921b1c1e2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#aeceffeac2d165fc042fc28c921b1c1e2">SCL90</a>&#160;&#160;&#160;'A'</td></tr>
+<tr class="separator:aeceffeac2d165fc042fc28c921b1c1e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a872ccc0099e8dc0d183d0e6da25fe62c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a872ccc0099e8dc0d183d0e6da25fe62c">SCL45</a>&#160;&#160;&#160;'B'</td></tr>
+<tr class="separator:a872ccc0099e8dc0d183d0e6da25fe62c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7e7a084b91feda5b2e74538f6a982b5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#ae7e7a084b91feda5b2e74538f6a982b5">SCL11</a>&#160;&#160;&#160;'C'</td></tr>
+<tr class="separator:ae7e7a084b91feda5b2e74538f6a982b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f1759b8946e5a9e3ececb9fc5d2c2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a39f1759b8946e5a9e3ececb9fc5d2c2e">SCL1_5</a>&#160;&#160;&#160;'D'</td></tr>
+<tr class="separator:a39f1759b8946e5a9e3ececb9fc5d2c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae1a27401b7fb01ccb9a82dbddbb54eea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1a/group___busstatus.html#gae1a27401b7fb01ccb9a82dbddbb54eea">PIN</a>&#160;&#160;&#160;0b10000000</td></tr>
+<tr class="separator:gae1a27401b7fb01ccb9a82dbddbb54eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa7208db1dcdbd641872efe65188e57f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1a/group___busstatus.html#gaa7208db1dcdbd641872efe65188e57f7">STS</a>&#160;&#160;&#160;0b00100000</td></tr>
+<tr class="separator:gaa7208db1dcdbd641872efe65188e57f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga103e00e19490431a9ac05d4259326840"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1a/group___busstatus.html#ga103e00e19490431a9ac05d4259326840">BER</a>&#160;&#160;&#160;0b00010000</td></tr>
+<tr class="separator:ga103e00e19490431a9ac05d4259326840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5c3d676d4fe4517c646f46418c8b3b63"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1a/group___busstatus.html#ga5c3d676d4fe4517c646f46418c8b3b63">AD0LRB</a>&#160;&#160;&#160;0b00001000</td></tr>
+<tr class="separator:ga5c3d676d4fe4517c646f46418c8b3b63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga340c2b3c6b9b621e3bf7a714a44c25f5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1a/group___busstatus.html#ga340c2b3c6b9b621e3bf7a714a44c25f5">AAS</a>&#160;&#160;&#160;0b00000100</td></tr>
+<tr class="separator:ga340c2b3c6b9b621e3bf7a714a44c25f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadf9cd4ad44de625db6924e995bc4aa70"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1a/group___busstatus.html#gadf9cd4ad44de625db6924e995bc4aa70">LAB</a>&#160;&#160;&#160;0b00000010</td></tr>
+<tr class="separator:gadf9cd4ad44de625db6924e995bc4aa70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad91fa5bb7926a489c6e63eb6f6ca4a19"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1a/group___busstatus.html#gad91fa5bb7926a489c6e63eb6f6ca4a19">BB</a>&#160;&#160;&#160;0b00000001</td></tr>
+<tr class="separator:gad91fa5bb7926a489c6e63eb6f6ca4a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:afbc50aa32f76b9df922670025b656192"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#afbc50aa32f76b9df922670025b656192">Init</a> (int portNr, int takt)</td></tr>
+<tr class="memdesc:afbc50aa32f76b9df922670025b656192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisierung des USB-ITS-Geräts.  <a href="#afbc50aa32f76b9df922670025b656192">Mehr ...</a><br /></td></tr>
+<tr class="separator:afbc50aa32f76b9df922670025b656192"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54664c28bd6edf078179e28b756f1618"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a54664c28bd6edf078179e28b756f1618">DeInit</a> (void)</td></tr>
+<tr class="memdesc:a54664c28bd6edf078179e28b756f1618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Freigeben der Ressourcen.  <a href="#a54664c28bd6edf078179e28b756f1618">Mehr ...</a><br /></td></tr>
+<tr class="separator:a54664c28bd6edf078179e28b756f1618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a488004cee01c873b22184dca25a73257"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a488004cee01c873b22184dca25a73257">serialDump</a> (void)</td></tr>
+<tr class="memdesc:a488004cee01c873b22184dca25a73257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Diese Funktion ist nicht weiter von der Dokumentation spezifiziert.  <a href="#a488004cee01c873b22184dca25a73257">Mehr ...</a><br /></td></tr>
+<tr class="separator:a488004cee01c873b22184dca25a73257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a301878e96e0ae926b817ac20754fb78a"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a301878e96e0ae926b817ac20754fb78a">start_iic</a> (bool MRX_ACK, short dest, char mode)</td></tr>
+<tr class="memdesc:a301878e96e0ae926b817ac20754fb78a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erzeugung eines Startrahmens auf dem I2C-Bus.  <a href="#a301878e96e0ae926b817ac20754fb78a">Mehr ...</a><br /></td></tr>
+<tr class="separator:a301878e96e0ae926b817ac20754fb78a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0edfd83e3ed17640eef33a602731a98d"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a0edfd83e3ed17640eef33a602731a98d">stop_iic</a> (void)</td></tr>
+<tr class="memdesc:a0edfd83e3ed17640eef33a602731a98d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erzeugung einer Stopp-Condition auf dem I2C-Bus.  <a href="#a0edfd83e3ed17640eef33a602731a98d">Mehr ...</a><br /></td></tr>
+<tr class="separator:a0edfd83e3ed17640eef33a602731a98d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a471eab529497cf7d04533be03f13854f"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a471eab529497cf7d04533be03f13854f">wr_byte_iic</a> (char b)</td></tr>
+<tr class="separator:a471eab529497cf7d04533be03f13854f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87531a50b750ade97e03b707e82add21"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a87531a50b750ade97e03b707e82add21">rd_byte_iic</a> (char *b, bool NOACK)</td></tr>
+<tr class="separator:a87531a50b750ade97e03b707e82add21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e958266139f5959cd421d9840756438"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a5e958266139f5959cd421d9840756438">restart_iic</a> (bool MRX_ACK, char dest, char mode)</td></tr>
+<tr class="separator:a5e958266139f5959cd421d9840756438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a804a3c152995cec048b59ea405f9ba98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a804a3c152995cec048b59ea405f9ba98">wr_byte_port</a> (char zuSchreiben)</td></tr>
+<tr class="separator:a804a3c152995cec048b59ea405f9ba98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a316032388c6e9d2b193372144a7dc0a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a316032388c6e9d2b193372144a7dc0a0">rd_byte_port</a> (char *gelesen)</td></tr>
+<tr class="separator:a316032388c6e9d2b193372144a7dc0a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfed229aef9c9f701a19a35e2c1cdd5b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#abfed229aef9c9f701a19a35e2c1cdd5b">is_initialized</a> (void)</td></tr>
+<tr class="separator:abfed229aef9c9f701a19a35e2c1cdd5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a636a2cd78bdd9ed8f88034fa855123b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a636a2cd78bdd9ed8f88034fa855123b9">relais_on</a> (void)</td></tr>
+<tr class="separator:a636a2cd78bdd9ed8f88034fa855123b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a233d3d45dec8f90d24720e23509c673a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a233d3d45dec8f90d24720e23509c673a">relais_off</a> (void)</td></tr>
+<tr class="separator:a233d3d45dec8f90d24720e23509c673a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a801936b261245054eb570e040642818a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a801936b261245054eb570e040642818a">led_on</a> (void)</td></tr>
+<tr class="separator:a801936b261245054eb570e040642818a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a429f05b7eac928971c19e37ddc7079be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a429f05b7eac928971c19e37ddc7079be">led_off</a> (void)</td></tr>
+<tr class="separator:a429f05b7eac928971c19e37ddc7079be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variablen</h2></td></tr>
+<tr class="memitem:a6f8059414f0228f0256115e024eeed4b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d42/i2cusb_8h.html#a6f8059414f0228f0256115e024eeed4b">fd</a></td></tr>
+<tr class="separator:a6f8059414f0228f0256115e024eeed4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p>Interface für das USB-ITS-Gerät fuer I2C-Seminar an der TUHH. </p>
+<p>Diese Datei enthält alle Definitionen fuer die i2cusb.c und wird zur Verwendung der Schnittstelle fuer das I2C-Interface inkludiert.</p>
+<dl class="section author"><dt>Autor</dt><dd>Christopher Büchse und Jan Burmeister </dd></dl>
+<dl class="section date"><dt>Datum</dt><dd>Sommersemester 2017 </dd></dl>
+</div><h2 class="groupheader">Makro-Dokumentation</h2>
+<a class="anchor" id="ae7e7a084b91feda5b2e74538f6a982b5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SCL11&#160;&#160;&#160;'C'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>SCL 11kHz </p>
+
+</div>
+</div>
+<a class="anchor" id="a39f1759b8946e5a9e3ececb9fc5d2c2e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SCL1_5&#160;&#160;&#160;'D'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>SCL 1.5kHz </p>
+
+</div>
+</div>
+<a class="anchor" id="a872ccc0099e8dc0d183d0e6da25fe62c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SCL45&#160;&#160;&#160;'B'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>SCL 45kHz </p>
+
+</div>
+</div>
+<a class="anchor" id="aeceffeac2d165fc042fc28c921b1c1e2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SCL90&#160;&#160;&#160;'A'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>SCL 90kHz PCD8584 Clocktakt </p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a class="anchor" id="a54664c28bd6edf078179e28b756f1618"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DeInit </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Freigeben der Ressourcen. </p>
+<p>Diese Funktion terminiert den I2C-Bus und gibt den Filedeskriptor frei. Idealerweise ist diese Funktion vor Beendigung des Programms aufzurufen. </p>
+
+</div>
+</div>
+<a class="anchor" id="afbc50aa32f76b9df922670025b656192"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Init </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>portNr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>takt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialisierung des USB-ITS-Geräts. </p>
+<p>Diese Funktion initialisiert das USB-ITS-Gerät und muss zu Beginn des Programms aufgerufen werden.</p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">portNr</td><td>Nummer des COM- bzw. ttyUSB-Ports </td></tr>
+    <tr><td class="paramname">takt</td><td>Bustakt für I2C-Bus (SCL90, SCL45, SCL11, SCL1_5)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warnung</dt><dd>Anders als bei der Delphi-Implementierung ist der Bustakt zwingend anzugeben! </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abfed229aef9c9f701a19a35e2c1cdd5b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_initialized </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>is_initialized: Diese Funktion gibt true zurück, wenn das Gerät und der I2C-Bus erfolgreich initialisiert wurden Argumente: void Rückgabewert: bool - true: erfolgreiche Initialisierung </p>
+
+</div>
+</div>
+<a class="anchor" id="a429f05b7eac928971c19e37ddc7079be"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void led_off </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>led_off: Diese Funktion schaltet die rote LED am USB-ITS-Gerät aus. Argumente: void Rückgabewert: void </p>
+
+</div>
+</div>
+<a class="anchor" id="a801936b261245054eb570e040642818a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void led_on </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>led_on: Diese Funktion schaltet die rote LED am USB-ITS-Gerät ein. Argumente: void Rückgabewert: void </p>
+
+</div>
+</div>
+<a class="anchor" id="a87531a50b750ade97e03b707e82add21"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char rd_byte_iic </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>NOACK</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>rd_byte_iic: Diese Funktion liest ein Byte als Master-Receiver vom I2C-Bus. Argumente: char* b - Puffer für das empfangene Byte bool NOACK - true: bei der nächste Übertragung wird ein negatives Acknowledge generiert Rückgabewert: char - Status des Busses nach der Übertragung (siehe Tabelle) Hinweis: Auf Grund des Aufbaus des PCD8584 wird das letzte Byte ausgegeben, was zuletzt auf dem Bus zu sehen war. </p>
+
+</div>
+</div>
+<a class="anchor" id="a316032388c6e9d2b193372144a7dc0a0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rd_byte_port </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>gelesen</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>rd_byte_port: Diese Funktion liest ein Byte von dem IO-Port des USB-ITS-Geräts. Argumente: char* gelesen - Puffer für das gelesene Byte Rückgabewert: void </p>
+
+</div>
+</div>
+<a class="anchor" id="a233d3d45dec8f90d24720e23509c673a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void relais_off </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>relais_off: Diese Funktion schaltet das Relais für die zusätzliche Bus- versorgung aus. Argumente: void Rückgabewert: void </p>
+
+</div>
+</div>
+<a class="anchor" id="a636a2cd78bdd9ed8f88034fa855123b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void relais_on </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>relais_on: Diese Funktion schaltet das Relais für die zusätzliche Bus- versorgung ein. Argumente: void Rückgabewert: void </p>
+
+</div>
+</div>
+<a class="anchor" id="a5e958266139f5959cd421d9840756438"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char restart_iic </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>MRX_ACK</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>restart_iic: Diese Funktion erzeugt einen neuen Startrahmen auf dem I2C-Bus. Argumente: siehe start_iic: Rückgabewert: char - Status des Busses nach der Übertragung (siehe Tabelle) </p>
+
+</div>
+</div>
+<a class="anchor" id="a488004cee01c873b22184dca25a73257"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void serialDump </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Diese Funktion ist nicht weiter von der Dokumentation spezifiziert. </p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000001">Noch zu erledigen:</a></b></dt><dd>herausfinden, was diese Funktion tut </dd></dl>
+<dl class="section warning"><dt>Warnung</dt><dd>nicht implementiert! </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a301878e96e0ae926b817ac20754fb78a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char start_iic </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>MRX_ACK</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">short&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erzeugung eines Startrahmens auf dem I2C-Bus. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">MRX_ACK</td><td>Acknowledge beim nächsten gesendeten Byte unterdrücken (true) oder nicht (false) </td></tr>
+    <tr><td class="paramname">dest</td><td>Zieladresse auf dem I2C-Bus </td></tr>
+    <tr><td class="paramname">mode</td><td>'r' für lesenden oder 'w' für schreibenden Zugriff</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>Status des Busses nach der Übertragung (siehe Tabelle)</dd></dl>
+<dl class="section warning"><dt>Warnung</dt><dd>Statt des Byte-Datentyps wird ein short verwendet, von dem das niedrigere Bit verwendet wird. Es ergibt sich kein Unterschied zur Delphi Implementierung bei der Adressierung. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0edfd83e3ed17640eef33a602731a98d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char stop_iic </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erzeugung einer Stopp-Condition auf dem I2C-Bus. </p>
+<dl class="section return"><dt>Rückgabe</dt><dd>Status des Busses nach Übertragung </dd></dl>
+<dl class="section see"><dt>Siehe auch</dt><dd><a class="el" href="../../db/d1a/group___busstatus.html">Busstatus-Rückgabewert für I2C-Befehle</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a471eab529497cf7d04533be03f13854f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char wr_byte_iic </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>wr_byte_iic: Diese Funktion schreibt als Master ein Byte auf den I2C-Bus. Argumente: char b - das zu schreibende Byte Rückgabewert: char - Status des Busses nach der Übertragung (siehe Tabelle) </p>
+
+</div>
+</div>
+<a class="anchor" id="a804a3c152995cec048b59ea405f9ba98"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void wr_byte_port </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>zuSchreiben</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>wr_byte_port: Diese Funktion schreibt ein Byte auf den IO-Port des USB-ITS-Geräts Argumente: char zuSchreiben - das zu schreibende Byte Rückgabewert: void </p>
+
+</div>
+</div>
+<h2 class="groupheader">Variablen-Dokumentation</h2>
+<a class="anchor" id="a6f8059414f0228f0256115e024eeed4b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Um mit dem Delphi-Interface übereinzustimmen, ist der Filedeskriptor global definiert. </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>
