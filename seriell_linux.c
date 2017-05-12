@@ -22,11 +22,11 @@
 int oeffne_port(int fd, int port) {
 	
 	char portname[] = PORTNAME;
-	portname[sizeof(portname)/sizeof(char)-1] = (char) (port+0x30);
+	portname[sizeof(portname)/sizeof(char)-2] = (char) (port+0x30);
 	
 	// den seriellen Port oeffnen.
 	if((fd = open(portname, FLAGS)) < 0) {
-		fprintf(stderr, "Fehler %d beim Oeffnen von %s: %s",  errno, portname,
+		fprintf(stderr, "Fehler %d beim Oeffnen von %s: %s\n",  errno, portname,
 					  strerror(errno));
 		return -1; // Oeffnen gescheitert
 	}
@@ -39,7 +39,7 @@ int oeffne_port(int fd, int port) {
 	
 	// Attribute des Filedeskriptors auf die termios-Struktur uebertragen
 	if(tcgetattr(fd, &seriell) != 0) {
-		fprintf(stderr, "Fehler %d beim Setzen der Attribute von termios Struktur", errno);
+		fprintf(stderr, "Fehler %d beim Setzen der Attribute von termios Struktur\n", errno);
 		return -1;
 	}
 	
@@ -80,16 +80,49 @@ int oeffne_port(int fd, int port) {
 	// Attribute aus der termios Struktur an Filedeskriptor uebergeben
 	//  - TCSANOW: sofort uebernehmen
 	if(tcsetattr(fd, TCSANOW, &seriell) != 0) {
-		fprintf(stderr, "Fehler %d beim Schreiben der Attribute von termios Struktur", errno);
+		fprintf(stderr, "Fehler %d beim Schreiben der Attribute von termios Struktur\n", errno);
 		return -1;
+	}
+	
+	if(fd == -1) {
+		fprintf(stderr, "oeffne_port: Oeffnen von seriellem Port fehlgeschlagen!\n");
 	}
 	
 	return fd;
 }
 
 int sende_befehl(int fd, char* befehl) {
+	
+	int rueckgabe = write(fd, befehl, 2);
+
 #if DEBUG
-	printf("Sende Befehl: %c%c", befehl[0], befehl[1]);
+	printf("Sende Befehl: %c%c, Rueckgabe: %d\n", befehl[0], befehl[1], rueckgabe);
 #endif
-	return write(fd, befehl, 2);
+
+	if(rueckgabe != 2) {
+		fprintf(stderr, "sende_befehl: Senden des Befehls fehlgeschlagen!\n");
+	}
+	
+	return rueckgabe;
+}
+
+int lese_antwort(int fd, char* puffer, int laenge) {
+	int gelesene_bytes = read(fd, puffer, laenge);
+	
+#if DEBUG
+	printf("Gelesene Bytes: %d (soll), %d (ist): %c%c%c\n", laenge, gelesene_bytes,
+			puffer[0], puffer[1], puffer[2]);
+#endif
+	
+	if(gelesene_bytes != laenge) {
+		fprintf(stderr, "lese_antwort: Lesen der Antwort fehlgeschlagen! Bytes erwartet: %d, bekommen: %d!\n", laenge, gelesene_bytes);
+	}
+	
+	return gelesene_bytes;
+}
+
+
+void err_quit(int fd) {
+	close(fd);
+	exit(EXIT_FAILURE);
 }

@@ -32,5 +32,7 @@
 
 
 extern int oeffne_port(int port, int baudrate);
+extern int sende_befehl(int fd, char* befehl);
+extern int lese_antwort(int fd, char* puffer, int laenge);
 
 #endif // SERIELL_LINUX_H_
