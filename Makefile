@@ -53,6 +53,7 @@ endif
 #     (fast) alle Warnungen.
 CFLAGS =  -std=c99
 CFLAGS += -Wall -Wextra -Wpedantic
+CFLAGS += -DDEBUG
 
 #=======================================================================
 # Programme auswaehlen
@@ -64,7 +65,7 @@ ORDNER = mkdir
 # Compiler auswaehlen
 #     Der Quellcode ist fuer gcc geschrieben, andere Compiler sind
 #     eventuell mit Anpassungen moeglich.
-CC = gcc
+CC = gcc-6
 #CC = gcc
 
 # Objektdateien als Abhaengigkeit definieren
