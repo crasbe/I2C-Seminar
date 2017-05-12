@@ -19,18 +19,37 @@
 #include "i2cusb.h"
 
 int fd;
+bool initialized = false;
 
 void Init(int portNr, int takt) {
-	// Seriellen Port oeffnen
-	if((fd = oeffne_port(fd, portNr)) == -1) {
-		fprintf(stderr, "Oeffnen vom seriellen Port fehlgeschlagen!");
-	}
-	// Reset des USB-ITS-Geraets
+	char puffer[3];
 	
+	// Seriellen Port oeffnen
+	fd = oeffne_port(fd, portNr);
+	
+	// Reset des USB-ITS-Geraets
+	sende_befehl(fd, "XX");
+	lese_antwort(fd, puffer, 2);
+	if(puffer[0] != 'X' || puffer[1] != 'X') {
+		fprintf(stderr, "lese_antwort: Lesen der Antwort fehlgeschlagen! Erwartet: 'XX', bekommen '%c%c'!\n",puffer[0], puffer[1]);
+		err_quit(fd);
+	}
+	
+	// Setzen der Baudrate
+	puffer[0] = 'C';
+	puffer[1] = (char) takt;
+	sende_befehl(fd, puffer);
+	lese_antwort(fd, puffer, 2);
+	if(puffer[0] != 'C' || puffer[1] != (char) takt) {
+		fprintf(stderr, "lese_antwort: Lesen der Antwort fehlgeschlagen! Erwartet: 'XX', bekommen '%c%c'!\n",puffer[0], puffer[1]);
+		err_quit(fd);
+	}
+	
+	initialized = true;
 }
 
 void DeInit(void) {
-	//
+	close(fd);
 }
 
 void serialDump(void) {
@@ -73,7 +92,7 @@ void rd_byte_port(char* gelesen) {
 
 bool is_initialized(void) {
 	//
-	return false;
+	return initialized;
 }
 
 void relais_on(void) {
