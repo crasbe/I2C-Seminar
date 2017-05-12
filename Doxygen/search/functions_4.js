@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['serialdump',['serialDump',['../d7/d42/i2cusb_8h.html#a488004cee01c873b22184dca25a73257',1,'i2cusb.c']]],
-  ['start_5fiic',['start_iic',['../d7/d42/i2cusb_8h.html#a301878e96e0ae926b817ac20754fb78a',1,'i2cusb.c']]],
-  ['stop_5fiic',['stop_iic',['../d7/d42/i2cusb_8h.html#a0edfd83e3ed17640eef33a602731a98d',1,'i2cusb.c']]]
+  ['oeffne_5fport',['oeffne_port',['../d4/de0/seriell__linux_8c.html#abaa5824f0f86e4fb2129daf347c2df37',1,'oeffne_port(int fd, int port):&#160;seriell_linux.c'],['../d3/d30/seriell__linux_8h.html#aefe1203d05d7a443aa982d3173ea9374',1,'oeffne_port(int port, int baudrate):&#160;seriell_linux.c']]]
 ];

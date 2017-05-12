@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['rd_5fbyte_5fiic',['rd_byte_iic',['../d7/d42/i2cusb_8h.html#a87531a50b750ade97e03b707e82add21',1,'i2cusb.c']]],
-  ['rd_5fbyte_5fport',['rd_byte_port',['../d7/d42/i2cusb_8h.html#a316032388c6e9d2b193372144a7dc0a0',1,'i2cusb.c']]],
-  ['relais_5foff',['relais_off',['../d7/d42/i2cusb_8h.html#a233d3d45dec8f90d24720e23509c673a',1,'i2cusb.c']]],
-  ['relais_5fon',['relais_on',['../d7/d42/i2cusb_8h.html#a636a2cd78bdd9ed8f88034fa855123b9',1,'i2cusb.c']]],
-  ['restart_5fiic',['restart_iic',['../d7/d42/i2cusb_8h.html#a5e958266139f5959cd421d9840756438',1,'i2cusb.c']]]
+  ['led_5foff',['led_off',['../df/d5b/i2cusb_8c.html#a429f05b7eac928971c19e37ddc7079be',1,'led_off(void):&#160;i2cusb.c'],['../d7/d42/i2cusb_8h.html#a429f05b7eac928971c19e37ddc7079be',1,'led_off(void):&#160;i2cusb.c']]],
+  ['led_5fon',['led_on',['../df/d5b/i2cusb_8c.html#a801936b261245054eb570e040642818a',1,'led_on(void):&#160;i2cusb.c'],['../d7/d42/i2cusb_8h.html#a801936b261245054eb570e040642818a',1,'led_on(void):&#160;i2cusb.c']]],
+  ['lese_5fantwort',['lese_antwort',['../d4/de0/seriell__linux_8c.html#a0982a6e978ae83b605104319a967c992',1,'lese_antwort(int fd, char *puffer, int laenge):&#160;seriell_linux.c'],['../d3/d30/seriell__linux_8h.html#a0982a6e978ae83b605104319a967c992',1,'lese_antwort(int fd, char *puffer, int laenge):&#160;seriell_linux.c']]]
 ];

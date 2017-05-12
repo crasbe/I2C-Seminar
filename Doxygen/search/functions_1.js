@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['init',['Init',['../d7/d42/i2cusb_8h.html#afbc50aa32f76b9df922670025b656192',1,'i2cusb.c']]],
-  ['is_5finitialized',['is_initialized',['../d7/d42/i2cusb_8h.html#abfed229aef9c9f701a19a35e2c1cdd5b',1,'i2cusb.c']]]
+  ['err_5fquit',['err_quit',['../d4/de0/seriell__linux_8c.html#a84eb6245336c8cb7f03b3d976763d8de',1,'err_quit(int fd):&#160;seriell_linux.c'],['../d3/d30/seriell__linux_8h.html#a84eb6245336c8cb7f03b3d976763d8de',1,'err_quit(int fd):&#160;seriell_linux.c']]]
 ];

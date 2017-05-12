@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['i2cusb_2eh',['i2cusb.h',['../d7/d42/i2cusb_8h.html',1,'']]],
-  ['init',['Init',['../d7/d42/i2cusb_8h.html#afbc50aa32f76b9df922670025b656192',1,'i2cusb.c']]],
-  ['is_5finitialized',['is_initialized',['../d7/d42/i2cusb_8h.html#abfed229aef9c9f701a19a35e2c1cdd5b',1,'i2cusb.c']]],
-  ['i2c_2dseminar',['I2C-Seminar',['../md_README.html',1,'']]]
+  ['fd',['fd',['../df/d5b/i2cusb_8c.html#a6f8059414f0228f0256115e024eeed4b',1,'fd():&#160;i2cusb.c'],['../d7/d42/i2cusb_8h.html#a6f8059414f0228f0256115e024eeed4b',1,'fd():&#160;i2cusb.c']]],
+  ['flags',['FLAGS',['../d3/d30/seriell__linux_8h.html#a6ccad09b4a2a06ae178418fdccf5940d',1,'seriell_linux.h']]]
 ];

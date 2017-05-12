@@ -100,7 +100,17 @@ Makrodefinitionen</h2></td></tr>
 <tr class="separator:gad91fa5bb7926a489c6e63eb6f6ca4a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
-<p>Zum Leichteren Überprüfen der Bits sind diese Masken definiert </p>
+<p>Die Funktionen <a class="el" href="../../d7/d42/i2cusb_8h.html#a9487d80d4f42e1a3a3273c4702f800fc" title="Erzeugung eines Startrahmens auf dem I2C-Bus. ">start_iic</a>, <a class="el" href="../../d7/d42/i2cusb_8h.html#a0edfd83e3ed17640eef33a602731a98d" title="Erzeugung einer Stopp-Condition auf dem I2C-Bus. ">stop_iic</a>, <a class="el" href="../../d7/d42/i2cusb_8h.html#a471eab529497cf7d04533be03f13854f" title="Diese Funktion schreibt als Master ein Byte auf den I2C-Bus. ">wr_byte_iic</a>, <a class="el" href="../../d7/d42/i2cusb_8h.html#a87531a50b750ade97e03b707e82add21" title="Diese Funktion liest ein Byte als Master-Receiver vom I2C-Bus. ">rd_byte_iic</a> und <a class="el" href="../../d7/d42/i2cusb_8h.html#a5e958266139f5959cd421d9840756438" title="Erzeugung eines neuen Startrahmens auf dem I2C-Bus. ">restart_iic</a> besitzen einen char-Rückgabewert, der den aktuellen Status des I2C-Busses bzw. des PCD8584-Controllers widergeben.</p>
+<p>Zum leichteren Überprüfen der Statusbits sind die folgende Masken als Makros definiert.</p>
+<dl class="section see"><dt>Siehe auch</dt><dd><a class="el" href="../../d7/d42/i2cusb_8h.html#a9487d80d4f42e1a3a3273c4702f800fc" title="Erzeugung eines Startrahmens auf dem I2C-Bus. ">start_iic</a> </dd>
+<dd>
+<a class="el" href="../../d7/d42/i2cusb_8h.html#a0edfd83e3ed17640eef33a602731a98d" title="Erzeugung einer Stopp-Condition auf dem I2C-Bus. ">stop_iic</a> </dd>
+<dd>
+<a class="el" href="../../d7/d42/i2cusb_8h.html#a471eab529497cf7d04533be03f13854f" title="Diese Funktion schreibt als Master ein Byte auf den I2C-Bus. ">wr_byte_iic</a> </dd>
+<dd>
+<a class="el" href="../../d7/d42/i2cusb_8h.html#a87531a50b750ade97e03b707e82add21" title="Diese Funktion liest ein Byte als Master-Receiver vom I2C-Bus. ">rd_byte_iic</a> </dd>
+<dd>
+<a class="el" href="../../d7/d42/i2cusb_8h.html#a5e958266139f5959cd421d9840756438" title="Erzeugung eines neuen Startrahmens auf dem I2C-Bus. ">restart_iic</a> </dd></dl>
 <h2 class="groupheader">Makro-Dokumentation</h2>
 <a class="anchor" id="ga340c2b3c6b9b621e3bf7a714a44c25f5"></a>
 <div class="memitem">
@@ -176,7 +186,7 @@ Makrodefinitionen</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>'PIN', Bit 7, (sollte nach der Übertragung 0 sein </p>
+<p>'PIN', Bit 7, (sollte nach der Übertragung 0 sein) </p>
 
 </div>
 </div>
