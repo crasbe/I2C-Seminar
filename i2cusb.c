@@ -1,10 +1,10 @@
 /**
  * @file i2cusb.c
  * 
- * @brief Interface für das USB-ITS-Geraet fuer I2C-Seminar an der TUHH.
+ * @brief Interface für das USB-ITS-Gerät für I2C-Seminar an der TUHH.
  * 
  * Gegen diese Datei wird das Programm gelinkt, um die Schnittstelle
- * fuer das I2C-Interface zu erhalten.
+ * für das I2C-Interface zu erhalten.
  * 
  * Alle bekannten Funktionen aus der Delphi-Implementierung werden auch
  * hier implementiert.
@@ -21,6 +21,25 @@
 int fd;
 bool initialized = false;
 
+// interne Funktionen
+/**
+ * @brief Interne Funktion zur Ausgabe des Busstatusses
+ * 
+ * @param status Statusbyte
+ */
+void decodeStatus(unsigned char busStatus) {
+	unsigned int status = busStatus;
+	printf("Busstatus: 0x%2X: ", status);
+	printf("PIN: %d, ", (status&PIN ? 1 : 0));
+	printf("STS: %d, ", (status&STS ? 1 : 0));
+	printf("BER: %d, ", (status&BER ? 1 : 0));
+	printf("AD0LRB: %d, ", (status&AD0LRB ? 1 : 0));
+	printf("AAS: %d, ", (status&AAS ? 1 : 0));
+	printf("LAB: %d, ", (status&LAB ? 1 : 0));
+	printf("BB: %d\n\n", (status&BB ? 1 : 0));
+}
+
+// API-Funktionen
 /**
  * @brief Initialisierung des USB-ITS-Geräts 
  * 
@@ -52,7 +71,7 @@ void Init(int portNr, int takt) {
 	sende_befehl(fd, puffer);
 	lese_antwort(fd, puffer, 2);
 	if(puffer[0] != 'C' || puffer[1] != (char) takt) {
-		fprintf(stderr, "Init: Lesen der Antwort fehlgeschlagen! Erwartet: 'XX', bekommen '%c%c'!\n",puffer[0], puffer[1]);
+		fprintf(stderr, "Init: Lesen der Antwort fehlgeschlagen! Erwartet: 'C%c', bekommen '%c%c'!\n", (char) takt, puffer[0], puffer[1]);
 		err_quit(fd);
 	}
 	
@@ -122,10 +141,14 @@ char start_iic(bool MRX_ACK, char dest, char mode) {
 	sende_befehl(fd, befehl);
 	lese_antwort(fd, puffer, 2);
 	if(puffer[0] != befehl[0]) {
-		fprintf(stderr, "start_iic: Lesen der Antwort fehlgeschlagen! Erwartet: '%cx', bekommen '%c%c'!\n",
-						befehl[0], puffer[0], puffer[1]);
+		fprintf(stderr, "start_iic: Lesen der Antwort fehlgeschlagen! Erwartet: '%c%c', bekommen '%c%c'!\n",
+						dest, befehl[0], puffer[0], puffer[1]);
 		err_quit(fd);
 	}
+
+#if DEBUG
+	decodeStatus(puffer[1]);
+#endif
 
 	return puffer[1];
 }
@@ -135,6 +158,8 @@ char start_iic(bool MRX_ACK, char dest, char mode) {
  * 
  * @return Status des Busses nach Übertragung
  * @see Busstatus
+ * @todo Herausfinden, warum die originale stop_iic Funktion einen Status
+ * zurückgibt.
  */
 char stop_iic(void) {
 	char puffer[2];
@@ -147,7 +172,8 @@ char stop_iic(void) {
 		err_quit(fd);
 	}
 	
-	return puffer[1];
+	//return puffer[1];
+	return 0;
 }
 
 /**
@@ -171,6 +197,10 @@ char wr_byte_iic(char b) {
 						befehl[0], befehl[1], puffer[0], puffer[1]);
 		err_quit(fd);
 	}
+
+#if DEBUG
+	decodeStatus(puffer[1]);
+#endif
 
 	return puffer[1];
 }
@@ -204,6 +234,10 @@ char rd_byte_iic(char* b, bool NOACK) {
 	}
 
 	*b = puffer[1];
+
+#if DEBUG
+	decodeStatus(puffer[2]);
+#endif
 
 	return puffer[2];
 }
@@ -242,6 +276,10 @@ char restart_iic(bool MRX_ACK, char dest, char mode) {
 						befehl[0], puffer[0], puffer[1]);
 		err_quit(fd);
 	}
+
+#if DEBUG
+	decodeStatus(puffer[1]);
+#endif
 
 	return puffer[1];
 }

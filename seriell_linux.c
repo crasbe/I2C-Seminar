@@ -134,7 +134,7 @@ int sende_befehl(int fd, char* befehl) {
 	int rueckgabe = write(fd, befehl, 2);
 
 #if DEBUG
-	printf("Sende Befehl: %c%c, Rueckgabe: %d\n", befehl[0], befehl[1], rueckgabe);
+	printf("Sende Befehl: %c%c, gesendete Bytes: %d\n", befehl[0], befehl[1], rueckgabe);
 #endif
 
 	if(rueckgabe != 2) {
@@ -158,7 +158,7 @@ int lese_antwort(int fd, char* puffer, int laenge) {
 	int gelesene_bytes = read(fd, puffer, laenge);
 	
 #if DEBUG
-	printf("Gelesene Bytes: %d (soll), %d (ist): %c%c%c\n", laenge, gelesene_bytes,
+	printf("Gelesene Bytes (soll/ist): %d/%d: %c%c%c\n", laenge, gelesene_bytes,
 			puffer[0], puffer[1], puffer[2]);
 #endif
 	

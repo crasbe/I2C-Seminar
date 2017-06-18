@@ -1,14 +1,26 @@
-/***********************************************************************
- * i2cseminar.c
+/**
+ * @file i2cseminar.c
  * 
- * Hauptprogramm fuer die Ansteuerung der I2C-Geraete.
+ * @brief Hauptprogramm für die Ansteuerung der I2C-Geräte
  * 
- * Autoren: Christopher Buechse und Jan Burmeister
- * Datum: Sommersemester 2017
- **********************************************************************/
+ * @authors Christopher Büchse und Jan Burmeister
+ * @date Sommersemester 2017
+ * 
+ * @todo MEHR DOKUMENTATION!
+ */
 
 #include "i2cusb.h"
 
 int main(void) {
+	Init(0, SCL90);
+	
+	start_iic(false, (char) 0xFF, 'r');
+	
+	char answer;
+	
+	rd_byte_iic(&answer, false);
+	
+	DeInit();
+	
 	return 0;
 }

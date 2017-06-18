@@ -87,13 +87,13 @@
  * 
  * Zum leichteren Überprüfen der Bits stehen Masken zur Verfügung.
  */
-#define PIN    0b10000000
-#define STS    0b00100000
-#define BER    0b00010000
-#define AD0LRB 0b00001000
-#define AAS    0b00000100
-#define LAB    0b00000010
-#define BB     0b00000001
+#define PIN    (1 << 7) //0b10000000
+#define STS    (1 << 5) //0b00100000
+#define BER    (1 << 4) //0b00010000
+#define AD0LRB (1 << 3) //0b00001000
+#define AAS    (1 << 2) //0b00000100
+#define LAB    (1 << 1) //0b00000010
+#define BB     (1 << 0) //0b00000001
 
 // Globale Variablen
 /*!
@@ -118,5 +118,10 @@ extern void relais_on(void);
 extern void relais_off(void);
 extern void led_on(void);
 extern void led_off(void);
+
+// Funktionen zur Debug-Ausgabe
+#if DEGUG
+extern void decodeStatus(char status);
+#endif
 
 #endif // I2CUSB_H_
