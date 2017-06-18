@@ -7,7 +7,7 @@
  * von Francisco Malpartida
  * veroeffentlicht unter CC--BY-SA 3.0
  * 
- * @authors Christopher Büchse und Jan Burmeister
+ * @authors Christopher BÃ¼chse und Jan Burmeister
  * @date Sommersemester 2017
  */
  
