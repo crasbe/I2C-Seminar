@@ -19,11 +19,17 @@
 #include "i2cusb.h"
 
 int fd;
+/**
+ * Diese globale Variable speichert den Zustand des USB-ITS-Geräts
+ * (initialisiert oder nicht).
+ **/
 bool initialized = false;
 
 // interne Funktionen
 /**
  * @brief Interne Funktion zur Ausgabe des Busstatusses
+ * 
+ * Diese Funktion schlüsselt den Busstatus nach den einzelnen Flags auf.
  * 
  * @param status Statusbyte
  */
