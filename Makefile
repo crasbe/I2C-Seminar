@@ -9,6 +9,7 @@
 #
 # make                   = die Software kompilieren
 # make clean             = das Projektverzeichnis aufräumen
+# make doxygen           = Doxygen Dokumentation erzeugen
 #
 # Um das Projekt neu zu bauen, erst "make clean", dann "make" ausfuehren
 #-----------------------------------------------------------------------
@@ -104,5 +105,10 @@ clean:
 # Programm ausfuehren
 run: $(ZIEL)$(ENDUNG)
 	./$(ZIEL)$(ENDUNG)
+	
+doxygen:
+	doxygen Doxyfile
+	$(MAKE) -C Doxygen/latex
+	
 	
 .PHONY : all clean ccversion run

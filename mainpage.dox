@@ -1,0 +1,42 @@
+// Dokumentation für die Hauptseite
+
+/** @mainpage I2C Seminar
+ * 
+ * @section intro_sec Einführung
+ * 
+ * Ziel des Seminars ist es, mithilfe des gestellten USB-ITS-Geräts
+ * ein u-blox Neo-7M GPS-Modul sowie ein 16x2 LCD per I2C anzusteuern.
+ * Dafür wird einerseits eine C-Implementierung der bisherigen
+ * Delphi-Schnittstelle erstellt, sowie der Hauptteil des Programmes
+ * ansich.
+ * Eine Version der C-Schnittstelle zur weiteren Verwendung in
+ * zukünftigen Seminaren ohne die für dieses Projekt relevanten
+ * Programmteile wird bereitgestellt.
+ * 
+ * @section using_sec Verwendung der C-Schnittstelle
+ * 
+ * @subsection makefile_sec Makefile
+ * 
+ * Um die Verwendung der C-Schnittstelle in eigenen Projekten zu
+ * vereinfachen, steht ein Makefile bereit, das für Linux, MacOSX sowie
+ * Windows verwendbar ist.
+ * 
+ * Um das Projekt zu kompilieren, genügt ein einfaches "make".
+ * Zum Aufräumen des Projektverzeichnisses kann der "make clean"-Befehl
+ * verwendet werden.
+ * 
+ * @subsubsection linux_sec Anpassungen für Linux
+ * 
+ * Das Makefile ist im Ursprungszustand für die Verwendung unter Linux
+ * bereits ausgelegt. Anzupassen ist eventuell der verwendete Compiler
+ * (Option CC), im Standardfall ist "gcc-6" angegeben.
+ * 
+ * @subsubsection macosx_sec Anpassungen für MacOS X
+ * 
+ * Für MacOS X muss die Variable "PLATTFORM" auf "macosx" geändert werden.
+ * Dazu ist einfach die Zeile "PLATTFORM=linux" auszukommentieren und
+ * die Zeile "PLATTFORM=macosx" einzukommentieren.
+ * Auch hier ist eventuell der Compiler (Option CC) anzupassen.
+ *
+ * 
+ */
