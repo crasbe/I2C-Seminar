@@ -1,15 +1,15 @@
 /**
  * @file seriell_linux.h
- * 
+ *
  * @brief Linux-Interface für serielle Schnittstelle
- * 
+ *
  * Diese Datei enthaelt alle Definitionen für die seriell_linux.c
  * Datei.
- * 
+ *
  * @warning Diese Header-Datei ist NICHT zur direkten Verwendung vorgesehen,
  * 			sondern kann nur ueber i2cusb.c verwendet werden!
  * @warning Diese Datei ist NUR für Linux geeignet!
- * 
+ *
  * @authors Christopher Büchse und Jan Burmeister
  * @date Sommersemester 2017
  */
@@ -33,7 +33,7 @@
 
 /**
  * @brief Baudrate des seriellen Ports
- * @see termios 
+ * @see termios
  */
 #define BAUDRATE B38400
 
@@ -47,7 +47,7 @@
 #define FLAGS (O_RDWR | O_NOCTTY | O_SYNC)
 
 // Funktionen
-extern int oeffne_port(int port, int baudrate);
+extern int oeffne_port(int fd, int port);
 extern int sende_befehl(int fd, char* befehl);
 extern int lese_antwort(int fd, char* puffer, int laenge);
 extern void err_quit(int fd);
