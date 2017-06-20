@@ -1,14 +1,14 @@
 /**
  * @file i2cusb.c
- * 
+ *
  * @brief Interface für das USB-ITS-Gerät für I2C-Seminar an der TUHH.
- * 
+ *
  * Gegen diese Datei wird das Programm gelinkt, um die Schnittstelle
  * für das I2C-Interface zu erhalten.
- * 
+ *
  * Alle bekannten Funktionen aus der Delphi-Implementierung werden auch
  * hier implementiert.
- * 
+ *
  * @authors Christopher Büchse und Jan Burmeister
  * @date Sommersemester 2017
  */
@@ -18,7 +18,7 @@
 
 #include "i2cusb.h"
 
-int fd;
+//int fd;
 /**
  * Diese globale Variable speichert den Zustand des USB-ITS-Geräts
  * (initialisiert oder nicht).
@@ -28,9 +28,9 @@ bool initialized = false;
 // interne Funktionen
 /**
  * @brief Interne Funktion zur Ausgabe des Busstatusses
- * 
+ *
  * Diese Funktion schlüsselt den Busstatus nach den einzelnen Flags auf.
- * 
+ *
  * @param status Statusbyte
  */
 void decodeStatus(unsigned char busStatus) {
@@ -47,22 +47,22 @@ void decodeStatus(unsigned char busStatus) {
 
 // API-Funktionen
 /**
- * @brief Initialisierung des USB-ITS-Geräts 
- * 
+ * @brief Initialisierung des USB-ITS-Geräts
+ *
  * Diese Funktion initialisiert das USB-ITS-Gerät und muss zu Beginn
  * des Programms aufgerufen werden.
- * 
+ *
  * @param portNr Nummer des COM- bzw. ttyUSB-Ports
  * @param takt Bustakt für I2C-Bus (SCL90, SCL45, SCL11, SCL1_5)
- * 
+ *
  * @warning Anders als bei der Delphi-Implementierung ist der Bustakt zwingend anzugeben!
  */
 void Init(int portNr, int takt) {
 	char puffer[3];
-	
+
 	// Seriellen Port oeffnen
 	fd = oeffne_port(fd, portNr);
-	
+
 	// Reset des USB-ITS-Geraets
 	sende_befehl(fd, "XX");
 	lese_antwort(fd, puffer, 2);
@@ -70,7 +70,7 @@ void Init(int portNr, int takt) {
 		fprintf(stderr, "Init: Lesen der Antwort fehlgeschlagen! Erwartet: 'XX', bekommen '%c%c'!\n",puffer[0], puffer[1]);
 		err_quit(fd);
 	}
-	
+
 	// Setzen der Baudrate
 	puffer[0] = 'C';
 	puffer[1] = (char) takt;
@@ -80,24 +80,24 @@ void Init(int portNr, int takt) {
 		fprintf(stderr, "Init: Lesen der Antwort fehlgeschlagen! Erwartet: 'C%c', bekommen '%c%c'!\n", (char) takt, puffer[0], puffer[1]);
 		err_quit(fd);
 	}
-	
+
 	initialized = true;
 }
 
 /**
  * @brief Freigeben der Ressourcen
- * 
+ *
  * Diese Funktion terminiert den I2C-Bus und gibt den Filedeskriptor
  * frei. Idealerweise ist diese Funktion vor Beendigung des Programms
  * aufzurufen.
- * 
+ *
  * @warning DeInit ist neu in der C-Implementierung hinzugekommen und
  * 			muss am Ende des Programms aufgerufen werden!
  */
 void DeInit(void) {
 	sende_befehl(fd, "OP"); // Stopp-Condition erzeugen
-	
-	// die Antwort ist nicht wirklich relevant...	
+
+	// die Antwort ist nicht wirklich relevant...
 	close(fd);
 }
 
@@ -112,14 +112,14 @@ void serialDump(void) {
 
 /**
  * @brief Erzeugung eines Startrahmens auf dem I2C-Bus
- * 
+ *
  * @param MRX_ACK Acknowledge beim nächsten gesendeten Byte unterdrücken (true) oder nicht (false)
  * @param dest Zieladresse auf dem I2C-Bus
  * @param mode 'r' für lesenden oder 'w' für schreibenden Zugriff
- * 
+ *
  * @return Status des Busses nach der Übertragung
  * @see Busstatus
- * 
+ *
  * @warning Statt des Byte-Datentyps wird ein short verwendet, von dem das
  * 			niedrigere Bit verwendet wird. Es ergibt sich kein Unterschied zur
  * 			Delphi Implementierung bei der Adressierung.
@@ -128,20 +128,20 @@ char start_iic(bool MRX_ACK, char dest, char mode) {
 
 	char befehl[2];
 	char puffer[2];
-	
+
 	// den Befehl zusammensetzen
 	if(mode == 'r') {
 		if(MRX_ACK == true) // mit Acknowledge
 			befehl[0] = 'S';
 		else
-			befehl[0] = 's'; // ohne Acknowledge 
+			befehl[0] = 's'; // ohne Acknowledge
 	} else if(mode == 'w') {
 		befehl[0] = 'T';
 	} else {
 		fprintf(stderr, "start_iic: Ungültiger Modus: %c\n!", mode);
 		return 0;
 	}
-	
+
 	befehl[1] = dest;
 
 	sende_befehl(fd, befehl);
@@ -161,7 +161,7 @@ char start_iic(bool MRX_ACK, char dest, char mode) {
 
 /**
  * @brief Erzeugung einer Stopp-Condition auf dem I2C-Bus
- * 
+ *
  * @return Status des Busses nach Übertragung
  * @see Busstatus
  * @todo Herausfinden, warum die originale stop_iic Funktion einen Status
@@ -169,15 +169,15 @@ char start_iic(bool MRX_ACK, char dest, char mode) {
  */
 char stop_iic(void) {
 	char puffer[2];
-	
+
 	sende_befehl(fd, "OP");
 	lese_antwort(fd, puffer, 2);
 	if(puffer[0] != 'O' || puffer[1] != 'P') {
-		fprintf(stderr, "stop_iic: Lesen der Antwort fehlgeschlagen! Erwartet: 'OP', bekommen '%c%c'!\n", 
+		fprintf(stderr, "stop_iic: Lesen der Antwort fehlgeschlagen! Erwartet: 'OP', bekommen '%c%c'!\n",
 						puffer[0], puffer[1]);
 		err_quit(fd);
 	}
-	
+
 	//return puffer[1];
 	return 0;
 }
@@ -189,10 +189,10 @@ char stop_iic(void) {
  * @see Busstatus
  */
 char wr_byte_iic(char b) {
-	
+
 	char befehl[2];
 	char puffer[2];
-	
+
 	befehl[0] = 'N';
 	befehl[1] = b;
 
@@ -221,10 +221,10 @@ char wr_byte_iic(char b) {
  *   		was zuletzt auf dem Bus zu sehen war.
  */
 char rd_byte_iic(char* b, bool NOACK) {
-	
+
 	char befehl[2];
 	char puffer[3];
-	
+
 	befehl[0] = 'R';
 	if(NOACK == true)
 		befehl[1] = '0';
@@ -259,20 +259,20 @@ char rd_byte_iic(char* b, bool NOACK) {
 char restart_iic(bool MRX_ACK, char dest, char mode) {
 	char befehl[2];
 	char puffer[2];
-	
+
 	// den Befehl zusammensetzen
 	if(mode == 'r') {
 		if(MRX_ACK == true) // mit Acknowledge
 			befehl[0] = 'V';
 		else
-			befehl[0] = 'v'; // ohne Acknowledge 
+			befehl[0] = 'v'; // ohne Acknowledge
 	} else if(mode == 'w') {
 		befehl[0] = 'U';
 	} else {
 		fprintf(stderr, "restart_iic: Ungültiger Modus: %c\n!", mode);
 		return 0;
 	}
-	
+
 	befehl[1] = dest;
 
 	sende_befehl(fd, befehl);
@@ -297,7 +297,7 @@ char restart_iic(bool MRX_ACK, char dest, char mode) {
 void wr_byte_port(char zuSchreiben) {
 	char befehl[2];
 	char puffer[2];
-	
+
 	befehl[0] = 'W';
 	befehl[1] = zuSchreiben;
 
@@ -315,10 +315,10 @@ void wr_byte_port(char zuSchreiben) {
  * @param gelesen - Puffer für das gelesene Byte
  */
 void rd_byte_port(char* gelesen) {
-	
+
 	char befehl[2];
 	char puffer[2];
-	
+
 	befehl[0] = 'D';
 	befehl[1] = 'D';
 
@@ -329,7 +329,7 @@ void rd_byte_port(char* gelesen) {
 						befehl[0], puffer[0], puffer[1]);
 		err_quit(fd);
 	}
-	
+
 	*gelesen = puffer[1];
 }
 
@@ -346,10 +346,10 @@ bool is_initialized(void) {
  * @brief Einschalten des Relais für die zusätzliche Busversorgung
  */
 void relais_on(void) {
-	
+
 	char befehl[2];
 	char puffer[2];
-	
+
 	befehl[0] = 'P';
 	befehl[1] = '1';
 
@@ -366,10 +366,10 @@ void relais_on(void) {
  * @brief Ausschalten des Relais für die zusätzliche Busversorgung
  */
 void relais_off(void) {
-	
+
 	char befehl[2];
 	char puffer[2];
-	
+
 	befehl[0] = 'P';
 	befehl[1] = '0';
 
@@ -386,10 +386,10 @@ void relais_off(void) {
  * @brief Einschalten der roten LED am USB-ITS-Gerät
  */
 void led_on(void) {
-	
+
 	char befehl[2];
 	char puffer[2];
-	
+
 	befehl[0] = 'L';
 	befehl[1] = '1';
 
@@ -406,10 +406,10 @@ void led_on(void) {
  * @brief Ausschalten der roten LED am USB-ITS-Gerät
  */
 void led_off(void) {
-	
+
 	char befehl[2];
 	char puffer[2];
-	
+
 	befehl[0] = 'L';
 	befehl[1] = '0';
 

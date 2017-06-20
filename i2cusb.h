@@ -1,12 +1,12 @@
 /**
  * @file i2cusb.h
- * 
+ *
  * @brief Interface für das USB-ITS-Gerät für I2C-Seminar an der TUHH.
- * 
+ *
  * Diese Datei enthält alle Definitionen für die i2cusb.c und
  * wird zur Verwendung der Schnittstelle für das I2C-Interface
  * inkludiert.
- * 
+ *
  * @authors Christopher Büchse und Jan Burmeister
  * @date Sommersemester 2017
  */
@@ -40,40 +40,40 @@
  * Die Funktionen #start_iic, #stop_iic, #wr_byte_iic, #rd_byte_iic und #restart_iic
  * besitzen einen char-Rückgabewert, der den aktuellen Status des
  * I2C-Busses bzw. des PCD8584-Controllers widergeben.
- * 
+ *
  * Zum leichteren Überprüfen der Statusbits sind die folgende Masken
  * als Makros definiert.
- * 
+ *
  * @see start_iic
  * @see stop_iic
  * @see wr_byte_iic
  * @see rd_byte_iic
  * @see restart_iic
- * 
+ *
  * @def PIN
  * 'PIN', Bit 7, (sollte nach der Übertragung 0 sein)
- * 
+ *
  * @def STS
  * 'STS', Bit 5, bei externer Stop-Condition aktiv
- * 
+ *
  * @def BER
  * 'BER', Bit 4, Bus-Error: falsches Start oder Stop
- * 
+ *
  * @def AD0LRB
  * 'AD0/BRB', Bit 3, falls AAS=0: letztes empangenes Bit, also Ack-Bit
- * 
+ *
  * @def AAS
  * 'AAS', Bit 2, Adressed As Slave (als Slave-Receiver)
- * 
+ *
  * @def LAB
  * 'LAB', Bit 1, Lost arbitration
- * 
+ *
  * @def BB
  * 'BB-', Bit 0, Bus Busy, 1= Bus frei (nach Stop-Condition)
  * @}
  */
- 
- /* 
+
+ /*
  * Bit | Bez. PCD8584 | Beschreibung
  * ----+--------------+------------------------------------------
  *  7  | PIN          | (sollte nach der Übertragung 0 sein)
@@ -84,7 +84,7 @@
  *  2  | AAS          | Adressed As Slave (als Slave-Receiver)
  *  1  | LAB          | Lost arbitration
  *  0  | BB-          | Bus Busy, 1=Bus frei (nach Stop-Cond.)
- * 
+ *
  * Zum leichteren Überprüfen der Bits stehen Masken zur Verfügung.
  */
 #define PIN    (1 << 7) //0b10000000
@@ -100,7 +100,18 @@
  * Um mit dem Delphi-Interface übereinzustimmen, ist der Filedeskriptor
  * global definiert.
  */
-extern int fd;
+ #ifdef __linux__
+int fd;          // Linux benutzt einen integer als Filedeskriptor
+#elif defined __WIN32
+#include <windows.h>
+HANDLE fd;
+#elif defined __WIN64
+#error WTF
+// was auch immer 64-bit Windows tut..
+#elif defined __APPLE__ && __MACH__ // MacOS X
+// TODO
+#endif
+//extern int fd;
 
 // Funktionen
 extern void Init(int portNr, int takt);
