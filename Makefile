@@ -2,7 +2,7 @@
 # I2C-Seminar, TUHH, SoSe 2017
 # ----------------------------
 # Makefile
-# 
+#
 # Autoren: Christopher Buechse und Jan Burmeister
 #-----------------------------------------------------------------------
 # Optionen:
@@ -35,7 +35,7 @@ SRC = $(ZIEL).c i2cusb.c
 #       seriellen Schnittstelle laden.
 #     - Fuer Windows die Dateiendung .exe spezifizieren
 ifeq ($(PLATTFORM),linux)
-    SRC += seriell_linux.c
+	SRC += seriell_linux.c
 endif
 ifeq ($(PLATTFORM),win32)
     SRC += seriell_win32.c
@@ -59,15 +59,22 @@ CFLAGS += -DDEBUG
 #=======================================================================
 # Programme auswaehlen
 
+ifeq ($(PLATTFORM),linux)
 LOESCH = rm -rf
 KOPIER = cp
 ORDNER = mkdir
+endif
+ifeq ($(PLATTFORM),win32)
+LOESCH = del
+COPY = copy
+ORDNER = mkdir
+endif
 
 # Compiler auswaehlen
 #     Der Quellcode ist fuer gcc geschrieben, andere Compiler sind
 #     eventuell mit Anpassungen moeglich.
-CC = gcc-6
-#CC = gcc
+#CC = gcc-6
+CC = gcc
 
 # Objektdateien als Abhaengigkeit definieren
 OBJ = $(SRC:.c=.o)
@@ -85,30 +92,30 @@ all: ccversion $(ZIEL)
 # Compiler-Version ausgeben
 ccversion:
 	$(CC) --version
-    
+
 # Target linken
 $(ZIEL): $(OBJ)
 	@echo $(MSG_LINK) $@
 	$(CC) $(LDFLAGS) $^ --output $@$(ENDUNG)
-   
+
 # Target kompilieren
 %.o: %.c
 	@echo $(MSG_COMPILE) $<
 	$(CC) -c $(CFLAGS) $< -o $@
-    
+
 
 # Projektverzeichnis saeubern
 clean:
 	@echo $(MSG_CLEAN)
 	$(LOESCH) *.o $(ZIEL)$(ENDUNG)
-    
+
 # Programm ausfuehren
 run: $(ZIEL)$(ENDUNG)
 	./$(ZIEL)$(ENDUNG)
-	
+
 doxygen:
 	doxygen Doxyfile
 	$(MAKE) -C Doxygen/latex
-	
-	
+
+
 .PHONY : all clean ccversion run
