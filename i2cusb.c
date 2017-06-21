@@ -98,7 +98,11 @@ void DeInit(void) {
 	sende_befehl(fd, "OP"); // Stopp-Condition erzeugen
 
 	// die Antwort ist nicht wirklich relevant...
+#ifdef __WIN32
+    CloseHandle(fd);
+#else
 	close(fd);
+#endif
 }
 
 /**

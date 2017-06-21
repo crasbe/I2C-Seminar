@@ -27,12 +27,12 @@
  * Standard-Port unter Windows für eine serielle Schnittstelle (über
  * USB).
  */
-#define PORTNAME "\\\\.\\COMxx"
+#define PORTNAME "\\\\.\\COMx"
 
 /**
  * @brief Baudrate des seriellen Ports
  */
-#define BAUDRATE 38400
+#define BAUDRATE CBR_38400
 
 
 // Funktionen

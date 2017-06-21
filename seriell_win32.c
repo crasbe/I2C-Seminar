@@ -16,6 +16,7 @@
  */
 
  #include <stdio.h>
+ #include <stdbool.h>
  #include <windows.h>
 
  #include "seriell_win32.h"
@@ -32,7 +33,52 @@
  */
 HANDLE oeffne_port(HANDLE fd, int port) {
 
+    char portname[] = PORTNAME;
+	portname[sizeof(portname)/sizeof(char)-2] = (char) (port+0x30); // ITOA für Arme...
 
+	// open the COM port
+	fd = CreateFile(portname, GENERIC_READ|GENERIC_WRITE, 0, NULL,
+                        OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    if(fd == INVALID_HANDLE_VALUE) {
+        fprintf(stderr, "Fehler beim Oeffnen von %s\n", portname);
+        CloseHandle(fd);
+        //return -1;
+    }
+
+    // Auslesen der Geräteparameter
+    DCB dcbSerialParams = {0};
+    dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
+    if(GetCommState(fd, &dcbSerialParams) == 0) {
+        fprintf(stderr, "Fehler beim Lesen der Parameter des seriellen Ports!\n");
+        CloseHandle(fd);
+        //return -1;
+    }
+
+    // Setzen/Verändern der Geräteparameter
+    dcbSerialParams.BaudRate = BAUDRATE;
+    dcbSerialParams.ByteSize = 8;
+    dcbSerialParams.StopBits = ONESTOPBIT;
+    dcbSerialParams.Parity = NOPARITY;
+    if(SetCommState(fd, &dcbSerialParams) == 0) {
+        fprintf(stderr, "Fehler beim Setzen der Parameter des seriellen Ports!\n");
+        CloseHandle(fd);
+        //return -1;
+    }
+
+    // Timeouts setzen
+    COMMTIMEOUTS timeouts = {0};
+    timeouts.ReadIntervalTimeout = 50;
+    timeouts.ReadTotalTimeoutConstant = 50;
+    timeouts.ReadTotalTimeoutMultiplier = 10;
+    timeouts.WriteTotalTimeoutConstant = 50;
+    timeouts.WriteTotalTimeoutMultiplier = 50;
+    if(SetCommTimeouts(fd, &timeouts) == 0) {
+        fprintf(stderr, "Fehler beim Setzen der Timeouts!\n");
+        CloseHandle(fd);
+        //return -1;
+    }
+
+    return fd;
 }
 
 /**
@@ -43,7 +89,25 @@ HANDLE oeffne_port(HANDLE fd, int port) {
  *
  */
 HANDLE sende_befehl(HANDLE fd, char* befehl) {
+	DWORD gesendete_bytes = 0;
 
+	if(WriteFile(fd, befehl, 2, &gesendete_bytes, NULL) == false) {
+        fprintf(stderr, "sende_befehl: Senden des Befehls fehlgeschlagen!\n");
+        CloseHandle(fd);
+        //return -1;
+	}
+
+#if DEBUG
+	printf("Sende Befehl: %c%c, gesendete Bytes: %lu\n", befehl[0], befehl[1], gesendete_bytes);
+#endif
+
+	if(gesendete_bytes != 2) {
+		fprintf(stderr, "sende_befehl: Senden des Befehls fehlgeschlagen! Zu wenig Daten gesendet!\n");
+        CloseHandle(fd);
+        //return -1;
+	}
+
+	return fd;
 }
 
 /**
@@ -57,7 +121,26 @@ HANDLE sende_befehl(HANDLE fd, char* befehl) {
  *
  */
 HANDLE lese_antwort(HANDLE fd, char* puffer, int laenge) {
+    DWORD gelesene_bytes = 0;
 
+    if(ReadFile(fd, puffer, laenge, &gelesene_bytes, NULL) == FALSE) {
+        fprintf(stderr, "lese_antwort: Lesen der Antwort fehlgeschlagen!\n");
+        CloseHandle(fd);
+        //return -1;
+    }
+
+#if DEBUG
+	printf("Gelesene Bytes (soll/ist): %d/%lu: %c%c%c\n", laenge, gelesene_bytes,
+			puffer[0], puffer[1], puffer[2]);
+#endif
+
+    if(gelesene_bytes != (unsigned long) laenge) {
+        fprintf(stderr, "lese_antwort: Lesen der Antwort fehlgeschlagen! Zu wenig Daten gelesen!\n");
+        CloseHandle(fd);
+        //return -1;
+    }
+
+    return fd;
 }
 
 /**
@@ -67,5 +150,6 @@ HANDLE lese_antwort(HANDLE fd, char* puffer, int laenge) {
  * @param fd Zu schließender Filedeskriptor
  */
 void err_quit(HANDLE fd) {
-
+    CloseHandle(fd);
+    exit(EXIT_FAILURE);
 }

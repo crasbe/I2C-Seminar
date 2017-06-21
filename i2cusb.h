@@ -15,10 +15,11 @@
 
 #include <stdbool.h>
 
-// fuer Linux, Windows und MacOSX die passende Version laden
+// fuer Linux, Windows und MacOSX die passenden Header laden
 #ifdef __linux__
 #include "seriell_linux.h"
 #elif defined __WIN32
+#include <windows.h>
 #include "seriell_win32.h"
 #elif defined __WIN64
 #include "seriell_win64.h"
@@ -100,16 +101,14 @@
  * Um mit dem Delphi-Interface übereinzustimmen, ist der Filedeskriptor
  * global definiert.
  */
- #ifdef __linux__
-int fd;          // Linux benutzt einen integer als Filedeskriptor
-#elif defined __WIN32
-#include <windows.h>
+#ifdef __linux__ // Linux benutzt einen integer als Filedeskriptor
+int fd;
+#elif defined __WIN32 // Windows benutzt einen HANDLE
 HANDLE fd;
 #elif defined __WIN64
-#error WTF
-// was auch immer 64-bit Windows tut..
+#error WIN64-Support ist noch nicht implementiert // was auch immer 64-bit Windows tut..
 #elif defined __APPLE__ && __MACH__ // MacOS X
-// TODO
+#error OSX Support ist noch nicht implementiert
 #endif
 //extern int fd;
 
@@ -131,8 +130,6 @@ extern void led_on(void);
 extern void led_off(void);
 
 // Funktionen zur Debug-Ausgabe
-#if DEGUG
 extern void decodeStatus(char status);
-#endif
 
 #endif // I2CUSB_H_
