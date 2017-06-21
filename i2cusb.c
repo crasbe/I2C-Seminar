@@ -58,6 +58,7 @@ void decodeStatus(unsigned char busStatus) {
  * @warning Anders als bei der Delphi-Implementierung ist der Bustakt zwingend anzugeben!
  */
 void Init(int portNr, int takt) {
+
 	char puffer[3];
 
 	// Seriellen Port oeffnen

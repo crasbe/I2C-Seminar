@@ -9,7 +9,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="all">
-				<Option output="I2C-Seminar" prefix_auto="1" extension_auto="1" />
+				<Option output="i2cseminar" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../Code" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -29,30 +29,20 @@
 		</Compiler>
 		<Unit filename="LCD_I2C.c">
 			<Option compilerVar="CC" />
-			<Option target="all" />
 		</Unit>
-		<Unit filename="LCD_I2C.h">
-			<Option target="all" />
-		</Unit>
+		<Unit filename="LCD_I2C.h" />
 		<Unit filename="Makefile" />
 		<Unit filename="i2cseminar.c">
 			<Option compilerVar="CC" />
-			<Option target="all" />
 		</Unit>
 		<Unit filename="i2cusb.c">
 			<Option compilerVar="CC" />
-			<Option target="all" />
 		</Unit>
-		<Unit filename="i2cusb.h">
-			<Option target="all" />
-		</Unit>
+		<Unit filename="i2cusb.h" />
 		<Unit filename="seriell_linux.c">
 			<Option compilerVar="CC" />
-			<Option target="all" />
 		</Unit>
-		<Unit filename="seriell_linux.h">
-			<Option target="all" />
-		</Unit>
+		<Unit filename="seriell_linux.h" />
 		<Unit filename="seriell_win32.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -19,10 +19,8 @@
 #    MacOSX.
 #    HINWEIS: Windows und MacOSX sind noch nicht unterstuetzt!
 #    Die passende Plattform auskommentieren.
-PLATTFORM = linux
-#PLATTFORM = win32
-#PLATTFORM = win64
-#PLATTFORM = macosx
+#PLATTFORM = unix
+PLATTFORM = win
 
 # Name der Zieldatei
 ZIEL = i2cseminar
@@ -34,19 +32,12 @@ SRC = $(ZIEL).c i2cusb.c
 #     - Die korrekte Quelldatei zum Ansprechen der
 #       seriellen Schnittstelle laden.
 #     - Fuer Windows die Dateiendung .exe spezifizieren
-ifeq ($(PLATTFORM),linux)
-	SRC += seriell_linux.c
+ifeq ($(PLATTFORM),unix)
+	SRC += seriell_unix.c
 endif
-ifeq ($(PLATTFORM),win32)
-    SRC += seriell_win32.c
+ifeq ($(PLATTFORM),win)
+    SRC += seriell_win.c
     ENDUNG = .exe
-endif
-ifeq ($(PLATTFORM),win64)
-    SRC += seriell_win64.c
-    ENDUNG = .exe
-endif
-ifeq ($(PLATTFORM),macosx)
-    SRC += seriell_macosx.c
 endif
 
 # Compiler Flags
@@ -54,6 +45,7 @@ endif
 #     (fast) alle Warnungen.
 CFLAGS =  -std=c99
 CFLAGS += -Wall -Wextra -Wpedantic
+CFLGAS += -fdiagnostics-color=always
 
 # Definition Flags
 #     Die Definitionsflags verhalten sich wie Definitionen in einer
@@ -65,12 +57,12 @@ DFLAGS = -DDEBUG
 #=======================================================================
 # Programme auswaehlen
 
-ifeq ($(PLATTFORM),linux)
+ifeq ($(PLATTFORM),unix)
 LOESCH = rm -rf
 KOPIER = cp
 ORDNER = mkdir
 endif
-ifeq ($(PLATTFORM),win32)
+ifeq ($(PLATTFORM),win)
 LOESCH = del
 COPY = copy
 ORDNER = mkdir
@@ -80,7 +72,8 @@ endif
 #     Der Quellcode ist fuer gcc geschrieben, andere Compiler sind
 #     eventuell mit Anpassungen moeglich.
 #CC = gcc-6
-CC = gcc
+#CC = gcc
+CC = gcc.exe
 
 # Objektdateien als Abhaengigkeit definieren
 OBJ = $(SRC:.c=.o)
@@ -107,7 +100,7 @@ $(ZIEL): $(OBJ)
 # Target kompilieren
 %.o: %.c
 	@echo $(MSG_COMPILE) $<
-	$(CC) -c $(CFLAGS) $(DFLAGS) $< -o $@
+	$(CC) -c $< $(CFLAGS) $(DFLAGS) -o $@
 
 
 # Projektverzeichnis saeubern

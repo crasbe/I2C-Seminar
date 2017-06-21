@@ -1,12 +1,12 @@
 /**
- * @file seriell_linux.c
+ * @file seriell_win.c
  *
- * @brief Linux-Interface für serielle Schnittstelle
+ * @brief Windows-Interface für serielle Schnittstelle
  *
  * Diese Datei enthält die Funktionen, die zur Ansteuerung des
  * seriellen Interfaces des USB-ITS-Gerätes notwendig sind.
  *
- * @warning Diese Datei ist NUR für Linux geeignet!
+ * @warning Diese Datei ist NUR für Windows geeignet!
  *
  * @authors Christopher Büchse und Jan Burmeister
  * @date Sommersemester 2017
@@ -19,7 +19,7 @@
  #include <stdbool.h>
  #include <windows.h>
 
- #include "seriell_win32.h"
+ #include "seriell_win.h"
 
  /**
  * @brief Öffnet den seriellen Port

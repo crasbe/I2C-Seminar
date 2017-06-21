@@ -1,17 +1,19 @@
 /**
  * @file seriell_linux.c
- * 
- * @brief Linux-Interface für serielle Schnittstelle
- * 
+ *
+ * @brief Unix-Interface für serielle Schnittstelle
+ *
  * Diese Datei enthält die Funktionen, die zur Ansteuerung des
  * seriellen Interfaces des USB-ITS-Gerätes notwendig sind.
- * 
- * @warning Diese Datei ist NUR für Linux geeignet!
- * 
+ *
+ * @warning Diese Datei ist NUR für unixoide Betriebssysteme geeignet!
+ * @warning Nur unter Linux getestet!
+ *
  * @authors Christopher Büchse und Jan Burmeister
  * @date Sommersemester 2017
- * 
+ *
  * @see http://man7.org/linux/man-pages/man3/termios.3.html
+ * @see https://developer.apple.com/library/content/documentation/DeviceDrivers/Conceptual/WorkingWSerial/WWSerial_SerialDevs/SerialDevices.html
  */
 
 #include <errno.h>   // Fehlerausgabe
@@ -22,46 +24,52 @@
 #include <unistd.h>
 #include <termios.h> // Terminal IO
 
-#include "seriell_linux.h"
+#include "seriell_unix.h"
 
 /**
  * @brief Öffnet den seriellen Port
- * 
- * Für das serielle Device wird die Termios-Struktur von Linux verwendet.
- * 
- * 
+ *
+ * Für das serielle Device wird die POSIX Termios-Struktur verwendet.
+ *
+ *
  * @param fd Filedeskriptor des seriellen Devices
  * @param port Portnummer des zu öffnenden Ports
- * @return neuer Filedeskriptor 
+ * @return neuer Filedeskriptor
  */
 int oeffne_port(int fd, int port) {
-	
+
 	char portname[] = PORTNAME;
+
+	// Bei Linux ist der Standardpfad für die serielle Schnittstelle über USB
+	// /dev/ttyUSBx, wobei das x durch die übergebene Portnummer ersetzt wird.
+	// Bei MacOS X ist der Standardpfad /dev/cu.usbserial, ohne Nummer.
+#ifdef __linux__
 	portname[sizeof(portname)/sizeof(char)-2] = (char) (port+0x30); // ITOA für Arme...
-	
+#endif
+
 	// den seriellen Port öffnen.
 	if((fd = open(portname, FLAGS)) < 0) {
 		fprintf(stderr, "Fehler %d beim Oeffnen von %s: %s\n",  errno, portname,
 					  strerror(errno));
 		return -1; // Oeffnen gescheitert
 	}
-	
+
 	// mögliche andere, gesetzte Flags löschen.
 	fcntl(fd, F_SETFL, 0);
-	
+
 	// den seriellen Port konfigurieren mit termios
 	struct termios seriell;
-	
+
 	// Attribute des Filedeskriptors auf die termios-Struktur uebertragen
 	if(tcgetattr(fd, &seriell) != 0) {
 		fprintf(stderr, "Fehler %d beim Setzen der Attribute von termios Struktur\n", errno);
 		return -1;
 	}
-	
+
 	// Baudrate fuer Ein- und Ausgabe setzen
 	cfsetispeed(&seriell, BAUDRATE);
 	cfsetospeed(&seriell, BAUDRATE);
-	
+
 	/**
 	 * Folgende Flags werden gesetzt:
 	 * 		- C_IFLAG
@@ -81,7 +89,7 @@ int oeffne_port(int fd, int port) {
 	 * 				8 bit pro Zeichen
 	 * 		- C_LFLAG
 	 * 			-# ICANNON (=0):
-	 * 				Mit Rohdaten arbeiten 
+	 * 				Mit Rohdaten arbeiten
 	 * 			-# ECHO (=0):
 	 * 				Empfangene Zeichen nicht wieder zurückgeben
 	 * 			-# ISIG (=0):
@@ -95,31 +103,31 @@ int oeffne_port(int fd, int port) {
 	 * 			-# VTIME (=10):
 	 * 				Timeout auf eine Sekunde setzen
 	 */
-	
+
 	seriell.c_iflag &= ~(IXON | IXOFF | IXANY);
 	seriell.c_iflag &= IGNBRK;
-	
+
 	seriell.c_cflag &= ~(PARENB | CSTOPB | CSIZE);
 	seriell.c_cflag |= CS8;
-	
+
 	seriell.c_lflag &= ~(ICANON | ECHO | ISIG);
-	
+
 	seriell.c_oflag &= ~(OPOST);
-	
+
 	seriell.c_cc[VMIN] = 0;
 	seriell.c_cc[VTIME] = 10;
-	
+
 	// Attribute aus der termios Struktur an Filedeskriptor uebergeben
 	//  - TCSANOW: sofort uebernehmen
 	if(tcsetattr(fd, TCSANOW, &seriell) != 0) {
 		fprintf(stderr, "Fehler %d beim Schreiben der Attribute von termios Struktur\n", errno);
 		return -1;
 	}
-	
+
 	if(fd == -1) {
 		fprintf(stderr, "oeffne_port: Oeffnen von seriellem Port fehlgeschlagen!\n");
 	}
-	
+
 	return fd;
 }
 
@@ -128,7 +136,7 @@ int oeffne_port(int fd, int port) {
  * @param fd Filedeskriptor von geöffnetem seriellen Port
  * @param befehl Zeiger auf zu sendenden Befehl
  * @return Anzahl gesendeter Zeichen
- * 
+ *
  */
 int sende_befehl(int fd, char* befehl) {
 	int rueckgabe = write(fd, befehl, 2);
@@ -140,7 +148,7 @@ int sende_befehl(int fd, char* befehl) {
 	if(rueckgabe != 2) {
 		fprintf(stderr, "sende_befehl: Senden des Befehls fehlgeschlagen!\n");
 	}
-	
+
 	return rueckgabe;
 }
 
@@ -152,27 +160,29 @@ int sende_befehl(int fd, char* befehl) {
  * @return Anzahl gelesener Bytes
  * @note Puffer MUSS mindestens drei Byte groß sein, sollte aber
  * 			>= laenge sein!
- * 
+ *
  */
 int lese_antwort(int fd, char* puffer, int laenge) {
 	int gelesene_bytes = read(fd, puffer, laenge);
-	
+
 #if DEBUG
 	printf("Gelesene Bytes (soll/ist): %d/%d: %c%c%c\n", laenge, gelesene_bytes,
 			puffer[0], puffer[1], puffer[2]);
 #endif
-	
+
 	if(gelesene_bytes != laenge) {
 		fprintf(stderr, "lese_antwort: Lesen der Antwort fehlgeschlagen! Bytes erwartet: %d, bekommen: %d!\n", laenge, gelesene_bytes);
 	}
-	
+
 	return gelesene_bytes;
 }
 
 /**
  * @brief Terminierung des Programms
+ *
  * Diese Funktion schließt den Filedeskriptor und beendet dann das Programm
  * mit einem Fehlerwert.
+ *
  * @param fd Zu schließender Filedeskriptor
  */
 void err_quit(int fd) {

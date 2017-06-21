@@ -16,15 +16,11 @@
 #include <stdbool.h>
 
 // fuer Linux, Windows und MacOSX die passenden Header laden
-#ifdef __linux__
-#include "seriell_linux.h"
-#elif defined __WIN32
+#if defined (__linux__) || (defined (__APPLE__) && defined (__MACH__))
+#include "seriell_unix.h"
+#elif defined (__WIN32) || defined (_WIN64)
 #include <windows.h>
-#include "seriell_win32.h"
-#elif defined __WIN64
-#include "seriell_win64.h"
-#elif defined __APPLE__ && __MACH__ // MacOS X
-#include "seriell_macosx.h"
+#include "seriell_win.h"
 #endif
 
 // Konstanten
@@ -100,17 +96,15 @@
 /*!
  * Um mit dem Delphi-Interface übereinzustimmen, ist der Filedeskriptor
  * global definiert.
+ *
+ * Linux und MacOS X benutzen POSIX-Filedeskriptoren (integer), Windows
+ * hingegen einen HANDLE aus windows.h
  */
-#ifdef __linux__ // Linux benutzt einen integer als Filedeskriptor
+#if defined (__linux__) || (defined (__APPLE__) && defined (__MACH__))
 int fd;
-#elif defined __WIN32 // Windows benutzt einen HANDLE
+#elif defined (__WIN32) || defined (__WIN64)
 HANDLE fd;
-#elif defined __WIN64
-#error WIN64-Support ist noch nicht implementiert // was auch immer 64-bit Windows tut..
-#elif defined __APPLE__ && __MACH__ // MacOS X
-#error OSX Support ist noch nicht implementiert
 #endif
-//extern int fd;
 
 // Funktionen
 extern void Init(int portNr, int takt);
@@ -130,6 +124,6 @@ extern void led_on(void);
 extern void led_off(void);
 
 // Funktionen zur Debug-Ausgabe
-extern void decodeStatus(char status);
+extern void decodeStatus(unsigned char status);
 
 #endif // I2CUSB_H_
