@@ -54,7 +54,13 @@ endif
 #     (fast) alle Warnungen.
 CFLAGS =  -std=c99
 CFLAGS += -Wall -Wextra -Wpedantic
-CFLAGS += -DDEBUG
+
+# Definition Flags
+#     Die Definitionsflags verhalten sich wie Definitionen in einer
+#     Header- oder Quelldatei, werden aber im Makefile gesetzt.
+#     Hier werden sie zum Einschalten der erweiterten Debugausgaben
+#     verwendet.
+DFLAGS = -DDEBUG
 
 #=======================================================================
 # Programme auswaehlen
@@ -101,7 +107,7 @@ $(ZIEL): $(OBJ)
 # Target kompilieren
 %.o: %.c
 	@echo $(MSG_COMPILE) $<
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $(DFLAGS) $< -o $@
 
 
 # Projektverzeichnis saeubern
