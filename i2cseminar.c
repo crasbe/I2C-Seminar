@@ -9,7 +9,7 @@
  * @todo MEHR DOKUMENTATION!
  */
 
-#include "i2cusb.h"
+#include "i2cusb/i2cusb.h"
 
 int main(void) {
 	Init(6, SCL90);

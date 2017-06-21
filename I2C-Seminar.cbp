@@ -13,7 +13,6 @@
 				<Option working_dir="../Code" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option use_console_runner="0" />
 				<MakeCommands>
 					<Build command="$make -f $makefile $target" />
 					<CompileFile command="$make -f $makefile $file" />
@@ -35,18 +34,18 @@
 		<Unit filename="i2cseminar.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="i2cusb.c">
+		<Unit filename="i2cusb/i2cusb.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="i2cusb.h" />
-		<Unit filename="seriell_linux.c">
+		<Unit filename="i2cusb/i2cusb.h" />
+		<Unit filename="i2cusb/seriell_unix.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="seriell_linux.h" />
-		<Unit filename="seriell_win32.c">
+		<Unit filename="i2cusb/seriell_unix.h" />
+		<Unit filename="i2cusb/seriell_win.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="seriell_win32.h" />
+		<Unit filename="i2cusb/seriell_win.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
