@@ -10,16 +10,12 @@
  */
 
 #include "i2cusb/i2cusb.h"
+#include "LCD_I2C.h"
 
 int main(void) {
-	Init(6, SCL90);
-
-	start_iic(false, (char) 0xFF, 'r');
-
-	char answer;
-
-	rd_byte_iic(&answer, false);
-
+	Init(8, SCL90);
+	initLCD(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
+	begin(16, 2, LCD_5x8DOTS);
 	DeInit();
 
 	return 0;

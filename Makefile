@@ -44,6 +44,7 @@ CFLGAS += -fdiagnostics-color=always
 #     verwendet.
 DFLAGS = -DDEBUG
 
+
 # Name der Zieldatei
 ZIEL = i2cseminar
 
@@ -69,6 +70,7 @@ ifeq ($(PLATTFORM),unix)
 
 	SRC += i2cusb\seriell_unix.c
 	SRC += i2cusb/i2cusb.c
+	SRC += LCD_I2C.c
 endif
 
 # Windows
@@ -79,6 +81,7 @@ ifeq ($(PLATTFORM),win)
 
 	SRC += i2cusb\seriell_win.c
 	SRC += i2cusb\i2cusb.c
+	SRC += LCD_I2C.c
 	ENDUNG = .exe
 endif
 
