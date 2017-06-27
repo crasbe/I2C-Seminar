@@ -2,3 +2,6 @@
 I2C-Seminar\.layout
 
 *.o
+*.layout
+*.save
+*.exe

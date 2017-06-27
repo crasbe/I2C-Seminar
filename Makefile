@@ -53,7 +53,7 @@ ZIEL = i2cseminar
 #=======================================================================
 
 # Liste der C-Quelldateien
-SRC = $(ZIEL).c
+SRC = $(ZIEL).c LCD_I2C.c ublox.c
 
 # Plattformspezifische Einstellungen
 #     - Befehle zum löschen, kopieren und Ordner erstellen auswählen.
@@ -68,9 +68,8 @@ ifeq ($(PLATTFORM),unix)
 	KOPIER = cp
 	ORDNER = mkdir
 
-	SRC += i2cusb\seriell_unix.c
+	SRC += i2cusb/seriell_unix.c
 	SRC += i2cusb/i2cusb.c
-	SRC += LCD_I2C.c
 endif
 
 # Windows
@@ -81,7 +80,7 @@ ifeq ($(PLATTFORM),win)
 
 	SRC += i2cusb\seriell_win.c
 	SRC += i2cusb\i2cusb.c
-	SRC += LCD_I2C.c
+
 	ENDUNG = .exe
 endif
 
