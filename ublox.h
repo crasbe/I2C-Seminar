@@ -21,7 +21,7 @@
 #define UBLOX_ADR 66  // 0x42
 
 // Funktionsprototypen
-extern int randomReadByteUblox(char adr, char* b);
-extern int randomReadStreamUblox(char adr, char* b, int length);
+extern int randomReadUblox(char adr, char* b, unsigned int length);
+extern int writeUblox(char* b, int length);
 
 #endif // UBLOX_H_
