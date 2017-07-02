@@ -434,7 +434,8 @@ or write operation.
 */
 void pulseEnable(char data);
 
+void sendLCD(char value, char mode)
 
-void sendLCD(char value, char mode);
+int i2cwrite ( char value );
 
 #endif

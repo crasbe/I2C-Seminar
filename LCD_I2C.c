@@ -346,7 +346,7 @@ void setBacklight( char value )
          _backlightStsMask = _backlightPinMask & LCD_NOBACKLIGHT;
       }
       //I2C
-      i2cio._write( _backlightStsMask );
+      i2cwrite( _backlightStsMask );
    }
 }
 
@@ -357,16 +357,11 @@ int init()
    // initialize the backpack IO expander
    // and display functions.
    // ------------------------------------------------------------------------
-
-
-   if ( _i2cio.begin ( _Addr ) == 1 )
-   {
-      _i2cio.portMode ( OUTPUT );  // Set the entire IO extender to OUTPUT
-      _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
-      status = 1;
-      _i2cio.write(0);  // Set the entire port to LOW
-   }
-   return ( status );
+   _dirMask = 0x00;// Set the entire IO extender to OUTPUT
+   _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
+   status = 1;
+   i2cwrite(0);  // Set the entire port to LOW
+   return(status);
 }
 
 void config (char lcd_Addr, char En, char Rw, char Rs,
@@ -433,11 +428,11 @@ void write4bits ( char value, char mode )
 
 void pulseEnable (char data)
 {
-   write (data | _En);   // En HIGH
-   write (data & ~_En);  // En LOW
+   i2cwrite (data | _En);   // En HIGH
+   i2cwrite (data & ~_En);  // En LOW
 }
 
-int write ( char value )
+int i2cwrite ( char value )
 {
    int status = 0;
 
@@ -447,7 +442,7 @@ int write ( char value )
       // outputs updating the output shadow of the device
       _shadow = ( value & ~(_dirMask) );
 	  //TODO: Hier die richtigen I2C-Funktionen einsetzen und nicht mehr die Wire-Librabry des Arduino
-      start_iic(true, _i2cAddr, "w");
+      start_iic(true, _Addr, "w");
       wr_byte_iic(_shadow);
       status = stop_iic();
    }

@@ -16,7 +16,7 @@
 #include <stdbool.h>
 
 #include "ublox.h"
-#include "i2cusb/i2susb.h"
+#include "i2cusb/i2cusb.h"
 
 /**
  * @brief Interne Funktion zum Initialisieren des I2C-Busses für
