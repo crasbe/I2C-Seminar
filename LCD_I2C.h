@@ -14,6 +14,7 @@
 #ifndef LiquidCrystal_I2C_h
 #define LiquidCrystal_I2C_h
 #include "i2cusb/i2cusb.h"
+#include <time.h>
 
 /*!
  @defined
@@ -434,8 +435,15 @@ or write operation.
 */
 void pulseEnable(char data);
 
-void sendLCD(char value, char mode)
+void sendLCD(char value, char mode);
 
 int i2cwrite ( char value );
+
+void delay(unsigned int mseconds);
+
+int init_io();
+
+void config (char lcd_Addr, char En, char Rw, char Rs,
+                                char d4, char d5, char d6, char d7 );
 
 #endif

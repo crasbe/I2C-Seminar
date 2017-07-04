@@ -75,11 +75,12 @@ int initRead(char adr) {
  * Registeradresse des NEO-7M Moduls.
  *
  * @param adr zu lesende Registeradresse
- * @param b Puffer für die zu lesenden Daten
+ * @param buffer für die zu lesenden Daten
  * @param length Anzahl der zu lesenden Bytes
  * @return 0 bei erfolgreicher Ausführung, -1 im Fehlerfall
  */
-int randomReadUblox(char adr, char* b, unsigned int length) {
+int randomReadUblox(char adr, char* buffer, unsigned int length) {
+    char rueck;
     // Überprüfen, ob Anzahl der zu lesenden Bytes > 0 ist.
     if(length == 0) {
         fprintf(stderr, "randomReadUblox: Zu lesende Bytezahl muss >=1 sein!\n");
@@ -93,14 +94,14 @@ int randomReadUblox(char adr, char* b, unsigned int length) {
     }
 
     // Dummyread, kein negatives Acknowledge generieren
-    rd_byte_iic(puffer, false);
+    rd_byte_iic(buffer, false);
 
     for(int i = 0; i < length; i++) {
         // bei dem letzten Read ein negatives Acknowledge generieren
         if(length-1 == i) {
-            rd_byte_iic(b+i, true);
+            rd_byte_iic(buffer+i, true);
         } else {
-            rueck = rd_byte_iic(b+i , false);
+            rueck = rd_byte_iic(buffer+i , false);
             // kein Ack-Bit
             if(!(rueck & AD0LRB)) {
                 fprintf(stderr, "randomReadUblox: Kein Acknowledge beim Lesen von Byte %d/%d empfangen!\n", i, length);
@@ -131,7 +132,7 @@ int randomReadUblox(char adr, char* b, unsigned int length) {
 int writeUblox(char* b, int length) {
     // die Länge der zu schreibenden Bytes muss mindestens 2 sein
     if(length < 2) {
-        frprintf(stderr, "writeUblox: Mindestlänge für Schreibzugriffe beträgt 2 Bytes!\n");
+        fprintf(stderr, "writeUblox: Mindestlänge für Schreibzugriffe beträgt 2 Bytes!\n");
         return -1;
     }
 
@@ -148,7 +149,7 @@ int writeUblox(char* b, int length) {
     }
 
     for(int i = 0; i < length; i++) {
-        rueck = wr_byte_iic(b+i);
+        rueck = wr_byte_iic(*(b+i));
         if(!(rueck & AD0LRB)) {
             fprintf(stderr, "writeUblox: Kein Ack bei Schreibvorgang empfangen!\n");
             return -1;

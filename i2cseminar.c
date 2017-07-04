@@ -20,10 +20,10 @@ int main(void) {
 
 	Init(8, SCL90);
 	initLCD(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
-	begin(16, 2, LCD_5x8DOTS);
+	//begin(16, 2, LCD_5x8DOTS);
 
     // u-blox Teil
-    while(true) { //! @TODO sinnvolle Abbruchbedingung hinzufügen
+    /*while(true) { //! @TODO sinnvolle Abbruchbedingung hinzufügen
         // Anzahl der zu lesenden Bytes auslesen
         randomReadUblox(253, puffer, 2);
         readBytes = ((unsigned int) puffer[0]) << 8; // High-Byte
@@ -37,7 +37,7 @@ int main(void) {
         }
         printf("\n\n");
     }
-
+    */
 
 	DeInit();
 

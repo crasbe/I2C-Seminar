@@ -19,7 +19,6 @@ static char _displaymode;
 static char _displayfunction;
 static t_backlightPol _polarity;
 
-#include "LCD_I2C.h"
 
 // General LCD commands - generic methods used by the rest of the commands
 // ---------------------------------------------------------------------------
@@ -70,12 +69,12 @@ void createChar(char location, char charmap[])
    location &= 0x7;            // we only have 8 locations 0-7
 
    command(LCD_SETCGRAMADDR | (location << 3));
-   delayMicroseconds(30);
+   delay(1);                    //TODO: Mikrosekunden-Timer (60 us)
 
    for (char i = 0; i < 8; i++)
    {
       write(charmap[i]);      // call the virtual write method
-      delayMicroseconds(40);
+      delay(1);                //TODO: Mirkosekunden-Timer (40 us)
    }
 }
 
@@ -83,13 +82,15 @@ void createChar(char location, char charmap[])
 void clear()
 {
    command(LCD_CLEARDISPLAY);             // clear display, set cursor position to zero
-   delayMicroseconds(HOME_CLEAR_EXEC);    // this command is time consuming
+   //delayMicroseconds(HOME_CLEAR_EXEC);    // this command is time consuming
+   delay(1);                                //TODO: Mikrosekunden-Timer
 }
 
 void home()
 {
    command(LCD_RETURNHOME);             // set cursor position to zero
-   delayMicroseconds(HOME_CLEAR_EXEC);  // This command is time consuming
+   //delayMicroseconds(HOME_CLEAR_EXEC);  // This command is time consuming
+   delay(1);                                //TODO: Mikrosekunden-Timer
 }
 
 void setCursor(char col, char row)
@@ -229,7 +230,7 @@ void noAutoscroll(void)
 //
 void begin(char cols, char lines, char dotsize)
 {
-   init();
+   init_io();
    if (lines > 1)
    {
       _displayfunction |= LCD_2LINE;
@@ -261,19 +262,23 @@ void begin(char cols, char lines, char dotsize)
       // we start in 8bit mode, try to set 4 bit mode
       // Special case of "Function Set"
       sendLCD(0x03, FOUR_BITS);
-      delayMicroseconds(4500); // wait min 4.1ms
+      //delayMicroseconds(4500); // wait min 4.1ms
+      delay(5);                 //TODO: Mikrosekunden-Timer
 
       // second try
       sendLCD( 0x03, FOUR_BITS );
-      delayMicroseconds(150); // wait min 100us
+      //delayMicroseconds(150); // wait min 100us
+      delay(1);                 //TODO: Mikrosekunden-Timer
 
       // third go!
       sendLCD( 0x03, FOUR_BITS );
-      delayMicroseconds(150); // wait min of 100us
+      //delayMicroseconds(150); // wait min of 100us
+      delay(1);                 //TODO: Mikrosekunden-Timer
 
       // finally, set to 4-bit interface
       sendLCD( 0x02, FOUR_BITS );
-      delayMicroseconds(150); // wait min of 100us
+      //delayMicroseconds(150); // wait min of 100us
+      delay(1);                 //TODO: Mikrosekunden-Timer
 
    }
    else
@@ -283,21 +288,25 @@ void begin(char cols, char lines, char dotsize)
 
       // Send function set command sequence
       command(LCD_FUNCTIONSET | _displayfunction);
-      delayMicroseconds(4500);  // wait more than 4.1ms
+      //delayMicroseconds(4500);  // wait more than 4.1ms
+      delay(5);                 //TODO: Mikrosekunden-Timer
 
       // second try
       command(LCD_FUNCTIONSET | _displayfunction);
-      delayMicroseconds(150);
+      //delayMicroseconds(150);
+      delay(1);                 //TODO: Mikrosekunden-Timer
 
       // third go
       command(LCD_FUNCTIONSET | _displayfunction);
-      delayMicroseconds(150);
+      //delayMicroseconds(150);
+      delay(1);                 //TODO: Mikrosekunden-Timer
 
    }
 
    // finally, set # lines, font size, etc.
    command(LCD_FUNCTIONSET | _displayfunction);
-   delayMicroseconds ( 60 );  // wait more
+   //delayMicroseconds ( 60 );  // wait more
+   delay(1);                 //TODO: Mikrosekunden-Timer
 
    // turn the display on with no cursor or blinking default
    _displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
@@ -350,7 +359,7 @@ void setBacklight( char value )
    }
 }
 
-int init()
+int init_io()
 {
    int status = 0;
 
@@ -442,9 +451,15 @@ int i2cwrite ( char value )
       // outputs updating the output shadow of the device
       _shadow = ( value & ~(_dirMask) );
 	  //TODO: Hier die richtigen I2C-Funktionen einsetzen und nicht mehr die Wire-Librabry des Arduino
-      start_iic(true, _Addr, "w");
+      start_iic(true, _Addr, 'w');
       wr_byte_iic(_shadow);
       status = stop_iic();
    }
    return ( (status == 0) );	//TODO: Statusüberprüfung an USB-ITS-Gerät anpassen
+}
+
+
+void delay(unsigned int mseconds){
+    clock_t goal = mseconds + clock();
+    while (goal > clock());
 }
