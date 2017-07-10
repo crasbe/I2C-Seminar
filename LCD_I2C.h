@@ -439,11 +439,11 @@ void sendLCD(char value, char mode);
 
 int i2cwrite ( char value );
 
-void delay(unsigned int mseconds);
-
 int init_io();
 
 void config (char lcd_Addr, char En, char Rw, char Rs,
                                 char d4, char d5, char d6, char d7 );
+
+void data(char value);
 
 #endif

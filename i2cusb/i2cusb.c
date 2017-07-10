@@ -15,8 +15,10 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include "i2cusb.h"
+
 
 //int fd;
 /**
@@ -178,9 +180,9 @@ char stop_iic(void) {
 	sende_befehl(fd, "OP");
 	lese_antwort(fd, puffer, 2);
 	if(puffer[0] != 'O' || puffer[1] != 'P') {
-		fprintf(stderr, "stop_iic: Lesen der Antwort fehlgeschlagen! Erwartet: 'OP', bekommen '%c%c'!\n",
-						puffer[0], puffer[1]);
-		err_quit(fd);
+		fprintf(stderr, "stop_iic: Lesen der Antwort fehlgeschlagen! Erwartet: 'OP', bekommen '%x%x'!\n",
+						puffer[0] & 0xFF, puffer[1] & 0xFF);
+		//err_quit(fd);
 	}
 
 	//return puffer[1];
@@ -204,9 +206,9 @@ char wr_byte_iic(char b) {
 	sende_befehl(fd, befehl);
 	lese_antwort(fd, puffer, 2);
 	if(puffer[0] != befehl[0] || puffer[1] != befehl[1]) {
-		fprintf(stderr, "wr_byte_iic: Lesen der Antwort fehlgeschlagen! Erwartet: '%c%c', bekommen '%c%c'!\n",
-						befehl[0], befehl[1], puffer[0], puffer[1]);
-		err_quit(fd);
+		fprintf(stderr, "wr_byte_iic: Lesen der Antwort fehlgeschlagen! Erwartet: '%x%x', bekommen '%x%x'!\n",
+						befehl[0] & 0xFF, befehl[1] & 0xFF, puffer[0] & 0xFF, puffer[1] & 0xFF);
+		//err_quit(fd);
 	}
 
 #if DEBUG
@@ -426,3 +428,14 @@ void led_off(void) {
 		err_quit(fd);
 	}
 }
+
+/**
+ * @brief Verzögerungs-Funktion, nicht Teil der offiziellen Library
+ */
+
+void delay(unsigned int mseconds)
+{
+    clock_t goal = mseconds + clock();
+    while (goal > clock());
+}
+

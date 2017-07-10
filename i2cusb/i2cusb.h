@@ -18,7 +18,8 @@
 // fuer Linux, Windows und MacOSX die passenden Header laden
 #if defined (__linux__) || (defined (__APPLE__) && defined (__MACH__))
 #include "seriell_unix.h"
-#elif defined (__WIN32) || defined (_WIN64)
+#endif
+#if defined (__WIN32) || defined (_WIN64)
 #include <windows.h>
 #include "seriell_win.h"
 #endif
@@ -122,6 +123,7 @@ extern void relais_on(void);
 extern void relais_off(void);
 extern void led_on(void);
 extern void led_off(void);
+extern void delay(unsigned int mseconds);
 
 // Funktionen zur Debug-Ausgabe
 extern void decodeStatus(unsigned char status);

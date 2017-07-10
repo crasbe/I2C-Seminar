@@ -27,7 +27,7 @@ void command(char value)
    sendLCD(value, COMMAND);
 }
 
-void write(char value)
+void data(char value)
 {
    sendLCD(value, LCD_DATA);
 }
@@ -73,7 +73,7 @@ void createChar(char location, char charmap[])
 
    for (char i = 0; i < 8; i++)
    {
-      write(charmap[i]);      // call the virtual write method
+      data(charmap[i]);      // call the virtual data method
       delay(1);                //TODO: Mirkosekunden-Timer (40 us)
    }
 }
@@ -95,8 +95,8 @@ void home()
 
 void setCursor(char col, char row)
 {
-   const byte row_offsetsDef[]   = { 0x00, 0x40, 0x14, 0x54 }; // For regular LCDs
-   const byte row_offsetsLarge[] = { 0x00, 0x40, 0x10, 0x50 }; // For 16x4 LCDs
+   const char row_offsetsDef[]   = { 0x00, 0x40, 0x14, 0x54 }; // For regular LCDs
+   const char row_offsetsLarge[] = { 0x00, 0x40, 0x10, 0x50 }; // For 16x4 LCDs
 
    if ( row >= _numlines )
    {
@@ -459,7 +459,3 @@ int i2cwrite ( char value )
 }
 
 
-void delay(unsigned int mseconds){
-    clock_t goal = mseconds + clock();
-    while (goal > clock());
-}

@@ -38,7 +38,7 @@
  */
  #ifdef __linux__
 #define PORTNAME "/dev/ttyUSBx"
-#elifdef __APPLE__ && __MACH__
+#elif defined __APPLE__ && __MACH__
 #define PORTNAME "/dev/cu.usbserial"
 #endif
 

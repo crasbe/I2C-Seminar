@@ -98,7 +98,7 @@ HANDLE sende_befehl(HANDLE fd, char* befehl) {
 	}
 
 #if DEBUG
-	printf("Sende Befehl: %c%c, gesendete Bytes: %lu\n", befehl[0], befehl[1], gesendete_bytes);
+	printf("Sende Befehl: %c%c, gesendete Bytes: '%lu'\n", befehl[0], befehl[1], gesendete_bytes);
 #endif
 
 	if(gesendete_bytes != 2) {
@@ -130,7 +130,7 @@ HANDLE lese_antwort(HANDLE fd, char* puffer, int laenge) {
     }
 
 #if DEBUG
-	printf("Gelesene Bytes (soll/ist): %d/%lu: %c%c%c\n", laenge, gelesene_bytes,
+	printf("Gelesene Bytes (soll/ist): %d/%lu: '%c%c%c'\n", laenge, gelesene_bytes,
 			puffer[0], puffer[1], puffer[2]);
 #endif
 

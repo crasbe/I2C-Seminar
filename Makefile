@@ -20,15 +20,15 @@
 #       win:  Windows 32- und 64-bit (ab Windows 7 getestet)
 #    HINWEIS: MacOSX ist noch nicht unterstützt!
 #    Die passende Plattform auskommentieren.
-#PLATTFORM = unix
-PLATTFORM = win
+PLATTFORM = unix
+#PLATTFORM = win
 
 # Compiler auswählen
 #     Der Quellcode ist für gcc geschrieben, andere Compiler sind
 #     eventuell mit Anpassungen möglich.
-#CC = gcc-6
+CC = gcc-6
 #CC = gcc
-CC = gcc.exe
+#CC = gcc.exe
 
 # Compiler Flags
 #     Die Compilerflags setzen den C-Standard auf C99 und aktivieren
