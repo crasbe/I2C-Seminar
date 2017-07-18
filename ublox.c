@@ -37,7 +37,7 @@ int initRead(char adr) {
     char rueck;
 
     // Startcondition auf dem Bus erzeugen, um Registeradresse zu schreiben
-    rueck = start_iic(true, UBLOX_ADR, 'w');
+    rueck = start_iic(false, UBLOX_ADR, 'w');
 
     // kein Ack-Bit
     if(!(rueck & AD0LRB)) {
@@ -55,7 +55,7 @@ int initRead(char adr) {
     }
 
     // Startcondition auf dem Bus erzeugen, um Registerinhalt zu lesen
-    rueck = start_iic(true, UBLOX_ADR, 'r');
+    rueck = restart_iic(false, UBLOX_ADR, 'r');
 
     // kein Ack-Bit
     if(!(rueck & AD0LRB)) {

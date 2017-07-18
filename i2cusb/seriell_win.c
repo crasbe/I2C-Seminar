@@ -132,6 +132,8 @@ HANDLE lese_antwort(HANDLE fd, char* puffer, int laenge) {
 #if DEBUG
 	printf("Gelesene Bytes (soll/ist): %d/%lu: '%c%c%c'\n", laenge, gelesene_bytes,
 			puffer[0], puffer[1], puffer[2]);
+    fprintf(stdout, "Test!Bekommen '%x.%x'!\n",
+						puffer[0] & 0xFF, puffer[1] & 0xFF);
 #endif
 
     if(gelesene_bytes != (unsigned long) laenge) {

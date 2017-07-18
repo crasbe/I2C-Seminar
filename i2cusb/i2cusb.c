@@ -180,8 +180,8 @@ char stop_iic(void) {
 	sende_befehl(fd, "OP");
 	lese_antwort(fd, puffer, 2);
 	if(puffer[0] != 'O' || puffer[1] != 'P') {
-		fprintf(stderr, "stop_iic: Lesen der Antwort fehlgeschlagen! Erwartet: 'OP', bekommen '%x%x'!\n",
-						puffer[0] & 0xFF, puffer[1] & 0xFF);
+		fprintf(stderr, "stop_iic: Lesen der Antwort fehlgeschlagen! Erwartet: '%x.%x', bekommen '%x.%x'!\n",
+						'O' & 0xFF, 'P' & 0xFF, puffer[0] & 0xFF, puffer[1] & 0xFF);
 		//err_quit(fd);
 	}
 
