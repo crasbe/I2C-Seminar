@@ -450,7 +450,6 @@ int i2cwrite ( char value )
       // Only write HIGH the values of the ports that have been initialised as
       // outputs updating the output shadow of the device
       _shadow = ( value & ~(_dirMask) );
-	  //TODO: Hier die richtigen I2C-Funktionen einsetzen und nicht mehr die Wire-Librabry des Arduino
       start_iic(true, _Addr, 'w');
       wr_byte_iic(_shadow);
       status = stop_iic();
