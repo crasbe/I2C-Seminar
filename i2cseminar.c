@@ -20,9 +20,15 @@ int main(void) {
     int *t;
 
 	Init(8, SCL90);
-	//initLCD(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
-	//begin(16, 2, LCD_5x8DOTS);
-
+	start_iic(true, 0x38, 'w');
+	wr_byte_iic(0x42);
+	stop_iic();
+	//initDisp(0x38, 16, 2);
+	//init();
+	//init();     //Aus irgendeinem Grund wird im offiziellen HelloWorld-Programm der Library init zwei Mal aufgerufen... TODO: Rausfinden, ob nötig
+	//backlight();
+	//print("Test???");
+    /*
     // u-blox Teil
     //while(true) { //! @TODO sinnvolle Abbruchbedingung hinzufügen
         // Anzahl der zu lesenden Bytes auslesen
@@ -41,7 +47,7 @@ int main(void) {
         printf("\n\n");
    //}
 
-
+    */
 	DeInit();
 
 	return 0;

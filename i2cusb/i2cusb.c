@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <time.h>
+#include <math.h>
 
 #include "i2cusb.h"
 
@@ -438,4 +439,11 @@ void delay(unsigned int mseconds)
     clock_t goal = mseconds + clock();
     while (goal > clock());
 }
+
+void delayMicroseconds(unsigned int micros)
+{
+    delay(ceil(micros / 1000.0));
+}
+
+
 

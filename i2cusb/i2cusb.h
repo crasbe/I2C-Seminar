@@ -124,6 +124,7 @@ extern void relais_off(void);
 extern void led_on(void);
 extern void led_off(void);
 extern void delay(unsigned int mseconds);
+extern void delayMicroseconds(unsigned int micros);
 
 // Funktionen zur Debug-Ausgabe
 extern void decodeStatus(unsigned char status);
