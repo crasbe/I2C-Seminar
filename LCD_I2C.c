@@ -9,11 +9,18 @@ inline size_t write(char value) {
 	return 1;
 }
 */
-/*inline void write(char value) {
+void writeChar(char value) {
 	sendDisp(value, Rs);
 }
-*/
 
+char _Addr;
+char _displayfunction;
+char _displaycontrol;
+char _displaymode;
+char _numlines;
+char _cols;
+char _rows;
+char _backlightval;
 
 
 
@@ -36,7 +43,7 @@ inline size_t write(char value) {
 // can't assume that its in that state when a sketch starts (and the
 // LiquidCrystal constructor is called).
 
-initDisp(char lcd_Addr,char lcd_cols,char lcd_rows)
+void initDisp(char lcd_Addr,char lcd_cols,char lcd_rows)
 {
   _Addr = lcd_Addr;
   _cols = lcd_cols;
@@ -286,8 +293,11 @@ void setBacklight(char new_val){
 	}
 }
 
-void printstr(const char c[]){
+void printstr(char* str, unsigned int len){
 	//This function is not identical to the function used for "real" I2C displays
 	//it's here so the user sketch doesn't have to be changed
 	//print(c);
+	for(unsigned int i = 0; i < len; i++) {
+        writeChar(str[i]);
+	}
 }

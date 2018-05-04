@@ -10,7 +10,7 @@
  * hier implementiert.
  *
  * @authors Christopher Büchse und Jan Burmeister
- * @date Sommersemester 2017
+ * @date Sommersemester 2018
  */
 
 #include <stdio.h>
@@ -139,7 +139,7 @@ char start_iic(bool MRX_ACK, char dest, char mode) {
 
 	// den Befehl zusammensetzen
 	if(mode == 'r') {
-		if(MRX_ACK == true) // mit Acknowledge
+		if(MRX_ACK == false) // mit Acknowledge
 			befehl[0] = 'S';
 		else
 			befehl[0] = 's'; // ohne Acknowledge
@@ -211,10 +211,6 @@ char wr_byte_iic(char b) {
 						befehl[0] & 0xFF, befehl[1] & 0xFF, puffer[0] & 0xFF, puffer[1] & 0xFF);
 		//err_quit(fd);
 	}
-
-#if DEBUG
-	decodeStatus(puffer[1]);
-#endif
 
 	return puffer[1];
 }

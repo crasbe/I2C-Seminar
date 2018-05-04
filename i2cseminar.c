@@ -4,7 +4,7 @@
  * @brief Hauptprogramm für die Ansteuerung der I2C-Geräte
  *
  * @authors Christopher Büchse und Jan Burmeister
- * @date Sommersemester 2017
+ * @date Sommersemester 2018
  *
  * @todo MEHR DOKUMENTATION!
  */
@@ -19,14 +19,12 @@ int main(void) {
     unsigned int readBytes;
     int *t;
 
-	Init(8, SCL90);
-	start_iic(true, 0x38, 'w');
-	wr_byte_iic(0x42);
-	stop_iic();
-	//initDisp(0x38, 16, 2);
-	//init();
-	//init();     //Aus irgendeinem Grund wird im offiziellen HelloWorld-Programm der Library init zwei Mal aufgerufen... TODO: Rausfinden, ob nötig
-	//backlight();
+	Init(2, SCL90);
+	initDisp(0x27, 16, 2);
+	init();
+	backlight();
+
+    printstr("Hallo!", 6);
 	//print("Test???");
     /*
     // u-blox Teil

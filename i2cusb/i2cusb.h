@@ -8,7 +8,7 @@
  * inkludiert.
  *
  * @authors Christopher Büchse und Jan Burmeister
- * @date Sommersemester 2017
+ * @date Sommersemester 2018
  */
 #ifndef I2CUSB_H_
 #define I2CUSB_H_

@@ -9,7 +9,7 @@
  * @warning Diese Datei ist NUR für Windows geeignet!
  *
  * @authors Christopher Büchse und Jan Burmeister
- * @date Sommersemester 2017
+ * @date Sommersemester 2018
  *
  * @see https://batchloaf.wordpress.com/2013/02/13/writing-bytes-to-a-serial-port-in-c/
  * @see https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).aspx

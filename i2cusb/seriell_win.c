@@ -9,7 +9,7 @@
  * @warning Diese Datei ist NUR für Windows geeignet!
  *
  * @authors Christopher Büchse und Jan Burmeister
- * @date Sommersemester 2017
+ * @date Sommersemester 2018
  *
  * @see https://batchloaf.wordpress.com/2013/02/13/writing-bytes-to-a-serial-port-in-c/
  * @see https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).aspx
@@ -67,11 +67,11 @@ HANDLE oeffne_port(HANDLE fd, int port) {
 
     // Timeouts setzen
     COMMTIMEOUTS timeouts = {0};
-    timeouts.ReadIntervalTimeout = 50;
-    timeouts.ReadTotalTimeoutConstant = 50;
-    timeouts.ReadTotalTimeoutMultiplier = 10;
-    timeouts.WriteTotalTimeoutConstant = 50;
-    timeouts.WriteTotalTimeoutMultiplier = 50;
+    timeouts.ReadIntervalTimeout = 500;
+    timeouts.ReadTotalTimeoutConstant = 500;
+    timeouts.ReadTotalTimeoutMultiplier = 100;
+    timeouts.WriteTotalTimeoutConstant = 500;
+    timeouts.WriteTotalTimeoutMultiplier = 100;
     if(SetCommTimeouts(fd, &timeouts) == 0) {
         fprintf(stderr, "Fehler beim Setzen der Timeouts!\n");
         CloseHandle(fd);

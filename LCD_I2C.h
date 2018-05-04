@@ -73,7 +73,7 @@ extern void autoscroll();
 extern void noAutoscroll();
 extern void createChar(char, char[]);
 extern void setCursor(char, char);
-extern void write(char);  //TODO: Nutzung prüfen und evtl. ersetzen/entfernen (im Original virtual void oder virtual size_t)
+extern void writeChar(char);  //TODO: Nutzung prüfen und evtl. ersetzen/entfernen (im Original virtual void oder virtual size_t)
 extern void command(char);
 extern void init();
 
@@ -84,7 +84,7 @@ extern void cursor_on();      	 					// alias for cursor()
 extern void cursor_off();      					// alias for noCursor()
 extern void setBacklight(char new_val);				// alias for backlight() and nobacklight()
 extern void load_custom_character(char char_num, char *rows);	// alias for createChar()
-extern void printstr(const char[]);
+extern void printstr(char*, unsigned int len);
 
 //Private functions
 extern void init_priv();
